@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/domain/entities/user.dart';
+import 'package:flutter_sample/domain/notes_interactor.dart';
 import 'package:flutter_sample/domain/photos_interactor.dart';
 import 'package:flutter_sample/domain/users_interactor.dart';
 import 'package:flutter_sample/common/inits.dart';
@@ -48,11 +49,19 @@ class ScreenFactory {
   }
 
   Widget makeUserRouter(User user) {
+    final photoStore = PhotoStore(photosInteractor: sl<PhotosInteractor>());
+    final mapStore = MapStore();
     return MultiProvider(
       providers: [
-        Provider(create: (_) => PhotoStore(photosInteractor: sl<PhotosInteractor>()),),
-        Provider(create: (_) => MapStore(),),
-        Provider(create: (_) => UserRouterStore(user: user),)
+        Provider.value(value: photoStore),
+        Provider.value(value: mapStore),
+        Provider(
+          create: (_) => UserRouterStore(
+              user: user,
+              photoStore: photoStore,
+              mapStore: mapStore,
+              notesInteractor: sl<NotesInteractor>()),
+        )
       ],
       child: const UserRouter(),
     );

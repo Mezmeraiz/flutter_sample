@@ -15,14 +15,10 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainPresentationState extends State<MainScreen> {
-
-  var _currentIndex = 0;
-
   late final ScreenFactory _screenFactory;
-
   late final PageController _pageController;
-
   late final List<Widget> _pages;
+  var _currentIndex = 0;
 
   @override
   void initState() {

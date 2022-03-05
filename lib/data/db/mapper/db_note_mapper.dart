@@ -11,19 +11,20 @@ extension NoteDBMapper on Note {
       'gender': gender,
       'latitude': latitude,
       'longitude': longitude,
-      'pictures': pictures,
+      'photos': photos.map((e) => e.toMap()).toList(),
     };
   }
 
   static Note fromMap(Map<String, dynamic> data) => Note(
+        id: data['id'] as int,
         firstName: data['firstName'] as String,
         lastName: data['lastName'] as String,
         picture: data['picture'] as String,
         thumbnail: data['thumbnail'] as String,
         gender: data['gender'] as String,
-        latitude: data['latitude'] as int,
-        longitude: data['longitude'] as int,
-        pictures: (data['pictures'] as List)
+        latitude: data['latitude'] as double,
+        longitude: data['longitude'] as double,
+        photos: (data['photos'] as List)
             .map((e) => PhotoDBMapper.fromMap(e))
             .toList(),
       );

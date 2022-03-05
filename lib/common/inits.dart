@@ -4,6 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter_sample/data/db/db.dart';
 import 'package:flutter_sample/data/db/notes_dao.dart';
 import 'package:flutter_sample/data/db/notes_dao_impl.dart';
+import 'package:flutter_sample/data/notes_repository.dart';
+import 'package:flutter_sample/data/notes_repository_impl.dart';
+import 'package:flutter_sample/domain/notes_interactor.dart';
+import 'package:flutter_sample/domain/notes_interactor_impl.dart';
 import 'package:flutter_sample/navigation/screen_factory.dart';
 import 'package:flutter_sample/data/api/photos_api.dart';
 import 'package:flutter_sample/data/api/users_api.dart';
@@ -48,6 +52,8 @@ registerRepository() {
       () => UsersRepositoryImpl(usersApi: sl()));
   sl.registerLazySingleton<PhotosRepository>(
       () => PhotosRepositoryImpl(photosApi: sl<PhotosApi>()));
+  sl.registerLazySingleton<NotesRepository>(
+      () => NotesRepositoryImpl(notesDAO: sl<NotesDAO>()));
 }
 
 registerInteractor() {
@@ -55,6 +61,8 @@ registerInteractor() {
       () => UsersInteractorImpl(usersRepository: sl()));
   sl.registerLazySingleton<PhotosInteractor>(
       () => PhotosInteractorImpl(photosRepository: sl()));
+  sl.registerLazySingleton<NotesInteractor>(
+      () => NotesInteractorImpl(notesRepository: sl()));
 }
 
 getStores() {

@@ -7,6 +7,7 @@ class DB {
   Future<Database> open() async {
     return await openDatabase(
         join((await getDatabasesPath()), 'sample_database.db'),
+        version: 1,
         onCreate: _createDB);
   }
 

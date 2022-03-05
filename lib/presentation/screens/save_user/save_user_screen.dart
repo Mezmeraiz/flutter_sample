@@ -17,9 +17,7 @@ class SaveUserScreen extends StatefulWidget {
 
 class _SaveUserScreenState extends State<SaveUserScreen> {
   late final PhotoStore _photoStore;
-
   late final MapStore _mapStore;
-
   late final UserRouterStore _userRouterStore;
 
   @override
@@ -89,7 +87,7 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
                 child: ActionButton(
                     title: "Сохранить",
                     onTap: () =>
-                    _userRouterStore.currentAction = UserRouterAction.next),
+                    _userRouterStore.saveNote()),
           ))
         ],
       ),

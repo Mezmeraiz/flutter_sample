@@ -2,12 +2,11 @@ import 'package:flutter_sample/domain/entities/photo.dart';
 
 extension PhotoDBMapper on Photo {
 
-  Map<String, dynamic> toMap(String noteId) {
+  Map<String, dynamic> toMap() {
     return {
       'id': id,
       'image': image,
       'thumbnail': thumbnail,
-      'noteId': noteId,
     };
   }
 
