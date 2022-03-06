@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/common/styles.dart';
 import 'package:flutter_sample/navigation/user_router/user_router_store.dart';
 import 'package:flutter_sample/presentation/screens/map/store/map_store.dart';
 import 'package:flutter_sample/presentation/screens/photo/store/photo_store.dart';
@@ -44,12 +45,17 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
                 const SizedBox(
                   height: 16,
                 ),
-                const Text("Location"),
+                const Text(
+                  "Location",
+                  style: blackStylePrimary,
+                ),
                 const SizedBox(
                   height: 16,
                 ),
                 Text(
-                    "${_mapStore.markerPosition?.latitude} ${_mapStore.markerPosition?.longitude}"),
+                  "${_mapStore.markerPosition?.latitude} ${_mapStore.markerPosition?.longitude}",
+                  style: blackStyleSecondary,
+                ),
                 const SizedBox(
                   height: 16,
                 ),
@@ -82,12 +88,10 @@ class _SaveUserScreenState extends State<SaveUserScreen> {
           ),
           Expanded(
               child: Container(
-                alignment: Alignment.bottomCenter, 
-                padding: const EdgeInsets.all(16),
-                child: ActionButton(
-                    title: "Сохранить",
-                    onTap: () =>
-                    _userRouterStore.saveNote()),
+            alignment: Alignment.bottomCenter,
+            padding: const EdgeInsets.all(16),
+            child: ActionButton(
+                title: "Сохранить", onTap: () => _userRouterStore.saveNote()),
           ))
         ],
       ),

@@ -4,4 +4,6 @@ abstract class NotesDAO {
 
   saveNote(Note note);
 
+  Future<List<Note>> getNotes();
+
 }

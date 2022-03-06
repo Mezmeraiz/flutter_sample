@@ -9,9 +9,10 @@ import 'package:flutter_sample/navigation/user_router/user_router_store.dart';
 import 'package:flutter_sample/presentation/screens/main/main_screen.dart';
 import 'package:flutter_sample/presentation/screens/map/map_screen.dart';
 import 'package:flutter_sample/presentation/screens/map/store/map_store.dart';
+import 'package:flutter_sample/presentation/screens/note/store/note_store.dart';
 import 'package:flutter_sample/presentation/screens/photo/store/photo_store.dart';
 import 'package:flutter_sample/presentation/screens/save_user/save_user_screen.dart';
-import 'package:flutter_sample/presentation/screens/saved/saved_screen.dart';
+import 'package:flutter_sample/presentation/screens/note/note_screen.dart';
 import 'package:flutter_sample/presentation/screens/tab/tab_screen.dart';
 import 'package:flutter_sample/domain/entities/photo.dart';
 import 'package:flutter_sample/presentation/screens/photo/photo_screen.dart';
@@ -30,7 +31,10 @@ class ScreenFactory {
   }
 
   Widget makeSavedScreen() {
-    return const SavedScreen();
+    return Provider(
+      create: (_) => NoteStore(sl<NotesInteractor>()),
+      child: const NoteScreen(),
+    );
   }
 
   Widget makePhotoScreen() {

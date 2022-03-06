@@ -17,8 +17,7 @@ class NotesRepositoryImpl implements NotesRepository {
     notesDAO.saveNote(note);
   }
 
-  // @override
-  // Future<List<User>> getUsers(int page, int results, {String? gender}) async =>
-  //     (await usersApi.getUsers(page, results, gender: gender)).results.map((e) => e.toUser()).toList();
+  @override
+  Future<List<Note>> getNotes() => notesDAO.getNotes();
 
 }

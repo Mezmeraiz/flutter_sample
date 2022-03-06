@@ -1,4 +1,4 @@
-import 'package:flutter_sample/data/db/mapper/db_note_mapper.dart';
+import 'package:flutter_sample/data/db/mapper/note_db_mapper.dart';
 import 'package:flutter_sample/data/db/notes_dao.dart';
 import 'package:flutter_sample/domain/entities/note.dart';
 import 'package:sqflite/sqflite.dart';
@@ -21,6 +21,19 @@ class NotesDAOImpl implements NotesDAO {
         txn.insert("photos", photo);
       }
     });
+  }
+
+  @override
+  Future<List<Note>> getNotes() async {
+    final result = await database.query("notes");
+    final List<Map<String, Object?>> notes = [];
+    for (Map<String, Object?> item in result) {
+      final Map<String, Object?> note = {}..addAll(item);
+      final photos = await database.query("photos", where: "noteId = ?", whereArgs: [note["id"]]);
+      note["photos"] = photos;
+      notes.add(note);
+    }
+    return notes.map((e) => NoteDBMapper.fromMap(e)).toList();
   }
 
 }

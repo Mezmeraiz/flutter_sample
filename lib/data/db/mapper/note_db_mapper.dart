@@ -1,4 +1,4 @@
-import 'package:flutter_sample/data/db/mapper/db_photo_mapper.dart';
+import 'package:flutter_sample/data/db/mapper/photo_db_mapper.dart';
 import 'package:flutter_sample/domain/entities/note.dart';
 
 extension NoteDBMapper on Note {

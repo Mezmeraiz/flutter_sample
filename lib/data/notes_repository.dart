@@ -3,7 +3,8 @@ import 'package:flutter_sample/domain/entities/user.dart';
 
 abstract class NotesRepository {
 
-  //Future<List<User>> getUsers(int page, int results, {String? gender});
   saveNote(Note note);
+
+  Future<List<Note>> getNotes();
 
 }

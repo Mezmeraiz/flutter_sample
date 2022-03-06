@@ -24,10 +24,7 @@ class NotesInteractorImpl implements NotesInteractor {
     notesRepository.saveNote(note);
   }
 
-// @override
-// Future<List<User>> getUsers(int page, int results) => usersRepository.getUsers(page, results);
-//
-// @override
-// Future<List<User>> getUsersByGender(String? gender) => usersRepository.getUsers(0, 50, gender: gender);
+  @override
+  Future<List<Note>> getNotes() => notesRepository.getNotes();
 
 }
