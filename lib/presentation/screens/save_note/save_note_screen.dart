@@ -7,16 +7,16 @@ import 'package:flutter_sample/presentation/screens/photo/store/photo_store.dart
 import 'package:flutter_sample/presentation/views/action_button.dart';
 import 'package:provider/provider.dart';
 
-class SaveUserScreen extends StatefulWidget {
+class SaveNoteScreen extends StatefulWidget {
   static const route = "save_user";
 
-  const SaveUserScreen({Key? key}) : super(key: key);
+  const SaveNoteScreen({Key? key}) : super(key: key);
 
   @override
-  _SaveUserScreenState createState() => _SaveUserScreenState();
+  _SaveNoteScreenState createState() => _SaveNoteScreenState();
 }
 
-class _SaveUserScreenState extends State<SaveUserScreen> {
+class _SaveNoteScreenState extends State<SaveNoteScreen> {
   late final PhotoStore _photoStore;
   late final MapStore _mapStore;
   late final UserRouterStore _userRouterStore;

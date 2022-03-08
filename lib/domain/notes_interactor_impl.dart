@@ -5,14 +5,15 @@ import 'package:flutter_sample/domain/entities/user.dart';
 import 'package:flutter_sample/domain/notes_interactor.dart';
 
 class NotesInteractorImpl implements NotesInteractor {
-
   NotesRepository notesRepository;
 
   NotesInteractorImpl({required this.notesRepository});
 
   @override
-  saveNote(User user, List<Photo> photos, double latitude, double longitude) {
-    var note = Note(id: null,
+  Future<int> saveNote(
+      User user, List<Photo> photos, double latitude, double longitude) {
+    var note = Note(
+        id: null,
         firstName: user.firstName,
         lastName: user.lastName,
         picture: user.picture,
@@ -21,10 +22,12 @@ class NotesInteractorImpl implements NotesInteractor {
         latitude: latitude,
         longitude: longitude,
         photos: photos);
-    notesRepository.saveNote(note);
+    return notesRepository.saveNote(note);
   }
 
   @override
   Future<List<Note>> getNotes() => notesRepository.getNotes();
 
+  @override
+  Future<Note> getNoteById(int noteId) => notesRepository.getNoteById(noteId);
 }

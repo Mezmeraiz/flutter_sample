@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_sample/common/colors.dart';
 import 'package:flutter_sample/navigation/user_router/user_router_store.dart';
 import 'package:flutter_sample/presentation/screens/map/store/map_store.dart';
-import 'package:flutter_sample/presentation/screens/save_user/save_user_screen.dart';
 import 'package:flutter_sample/presentation/stores/geo_store.dart';
 import 'package:flutter_sample/presentation/views/action_button.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -54,14 +52,14 @@ class _MapScreenState extends State<MapScreen> {
               markers: getMarkers(),
             ),
             AnimatedPositioned(
-              duration: const Duration(milliseconds: 500),
-              left: 16,
-              right: 16,
-              bottom: _mapStore.markerPosition != null ? 16 : -100,
-              child: ActionButton(
-                  title: "Далее",
-                  onTap: () => _userRouterStore.currentAction = UserRouterAction.next)
-            )
+                duration: const Duration(milliseconds: 500),
+                left: 16,
+                right: 16,
+                bottom: _mapStore.markerPosition != null ? 16 : -100,
+                child: ActionButton(
+                    title: "Далее",
+                    onTap: () =>
+                        _userRouterStore.currentAction = UserRouterAction.next))
           ],
         );
       }),

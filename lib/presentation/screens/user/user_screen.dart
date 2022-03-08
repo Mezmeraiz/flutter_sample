@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_sample/domain/entities/user.dart';
 import 'package:flutter_sample/presentation/screens/user/store/user_store.dart';
 import 'package:flutter_sample/presentation/screens/user/user_list_item.dart';
 import 'package:provider/provider.dart';
@@ -40,4 +39,3 @@ class UserScreenState extends State<UserScreen>
   @override
   bool get wantKeepAlive => true;
 }
-

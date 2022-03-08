@@ -1,9 +1,9 @@
 import 'package:flutter_sample/domain/entities/note.dart';
 
 abstract class NotesDAO {
-
-  saveNote(Note note);
+  Future<int> saveNote(Note note);
 
   Future<List<Note>> getNotes();
 
+  Future<Note> getNoteById(int noteId);
 }

@@ -9,7 +9,7 @@ abstract class PhotosApi {
   factory PhotosApi(Dio dio, {String baseUrl}) = _PhotosApi;
 
   @GET('/photos')
-  Future<List<PhotoDTO>> getPhotos(@Query("page") int page, {
-    @Query("client_id") String clientId = "wM_AxsrrX3XZCPR81_vwHnAcwW9hWp-jYCATG7eK2qM"});
-
+  Future<List<PhotoDTO>> getPhotos(@Query("page") int page,
+      {@Query("client_id") String clientId =
+          "wM_AxsrrX3XZCPR81_vwHnAcwW9hWp-jYCATG7eK2qM"});
 }

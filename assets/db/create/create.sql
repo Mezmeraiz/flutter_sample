@@ -10,8 +10,9 @@ CREATE TABLE IF NOT EXISTS notes(
 );
 
 CREATE TABLE IF NOT EXISTS photos(
-    id String PRIMARY KEY,
+    id String,
     image TEXT,
     thumbnail TEXT,
-    noteId TEXT
+    noteId TEXT,
+    PRIMARY KEY (id, noteId)
 );

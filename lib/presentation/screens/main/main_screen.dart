@@ -1,14 +1,15 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/navigation/screen_factory.dart';
 import 'package:flutter_sample/common/inits.dart';
-import 'package:flutter_sample/presentation/screens/photo/photo_screen.dart';
+import 'package:flutter_sample/navigation/main_router/main_router_configuration.dart';
+import 'package:flutter_sample/navigation/main_router/main_router_store.dart';
+import 'package:flutter_sample/navigation/screen_factory.dart';
+import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
   static const route = "main";
+  int currentIndex;
 
-  const MainScreen({Key? key}) : super(key: key);
+  MainScreen({Key? key, required this.currentIndex}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => MainPresentationState();
@@ -18,17 +19,24 @@ class MainPresentationState extends State<MainScreen> {
   late final ScreenFactory _screenFactory;
   late final PageController _pageController;
   late final List<Widget> _pages;
-  var _currentIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _screenFactory =  sl<ScreenFactory>();
-    _pageController = PageController();
+    _screenFactory = sl<ScreenFactory>();
+    _pageController = PageController(initialPage: widget.currentIndex);
     _pages = [
       _screenFactory.makeTabScreen(),
-      _screenFactory.makeSavedScreen(),
+      _screenFactory.makeNoteScreen(),
     ];
+  }
+
+  @override
+  void didUpdateWidget(covariant MainScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    Future.microtask(() {
+      _pageController.jumpToPage(widget.currentIndex);
+    });
   }
 
   @override
@@ -41,15 +49,14 @@ class MainPresentationState extends State<MainScreen> {
         children: _pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
+        currentIndex: widget.currentIndex,
         type: BottomNavigationBarType.fixed,
-        onTap: (index) => setState(() {
-          _currentIndex = index;
-          _pageController.jumpToPage(_currentIndex);
-        }),
+        onTap: (index) => context
+            .read<MainRouterStore>()
+            .setNewConfiguration(MainRouterConfiguration.main(index)),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.group), label: "Users"),
-          BottomNavigationBarItem(icon: Icon(Icons.save), label: "Saved"),
+          BottomNavigationBarItem(icon: Icon(Icons.save), label: "Notes"),
         ],
       ),
     );
@@ -60,5 +67,4 @@ class MainPresentationState extends State<MainScreen> {
     super.dispose();
     _pageController.dispose();
   }
-
 }

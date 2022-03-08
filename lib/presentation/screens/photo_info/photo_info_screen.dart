@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sample/domain/entities/photo.dart';
 
 class PhotoInfoScreen extends StatefulWidget {
-
   static const route = "photo_info";
 
   final Photo photo;
@@ -11,15 +10,11 @@ class PhotoInfoScreen extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => PhotoInfoScreenState();
-
 }
 
 class PhotoInfoScreenState extends State<PhotoInfoScreen> {
-
-
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
         appBar: AppBar(),
         body: Stack(
@@ -29,8 +24,6 @@ class PhotoInfoScreenState extends State<PhotoInfoScreen> {
                 height: double.infinity,
                 fit: BoxFit.cover),
           ],
-        )
-    );
+        ));
   }
-
 }

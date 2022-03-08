@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/common/colors.dart';
-import 'package:flutter_sample/common/constants.dart';
-import 'package:flutter_sample/common/styles.dart';
 import 'package:flutter_sample/common/inits.dart';
 import 'package:flutter_sample/navigation/screen_factory.dart';
 
@@ -36,14 +34,11 @@ class MainPresentationState extends State<TabScreen>
                 floating: true,
                 pinned: true,
                 title: Text("TabScreen"),
-                bottom: TabBar(
-                  indicatorColor: colorWhite,
-                    tabs: [
-                      Tab(text: "All"),
-                      Tab(text: "Male"),
-                      Tab(text: "Female"),
-                    ]
-                ),
+                bottom: TabBar(indicatorColor: colorWhite, tabs: [
+                  Tab(text: "All"),
+                  Tab(text: "Male"),
+                  Tab(text: "Female"),
+                ]),
               ),
             ],
             body: TabBarView(children: [
@@ -58,5 +53,3 @@ class MainPresentationState extends State<TabScreen>
   @override
   bool get wantKeepAlive => true;
 }
-
-

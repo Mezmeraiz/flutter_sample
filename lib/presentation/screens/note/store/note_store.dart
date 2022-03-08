@@ -9,7 +9,7 @@ class NoteStore = NoteStoreBase with _$NoteStore;
 abstract class NoteStoreBase with Store {
   final NotesInteractor notesInteractor;
 
-  NoteStoreBase(this.notesInteractor){
+  NoteStoreBase(this.notesInteractor) {
     fetchNotes();
   }
 

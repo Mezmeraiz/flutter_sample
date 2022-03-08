@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_sample/common/colors.dart';
 import 'package:flutter_sample/navigation/user_router/user_router_store.dart';
-import 'package:flutter_sample/presentation/screens/map/map_screen.dart';
 import 'package:flutter_sample/presentation/screens/photo/photo_list_item.dart';
 import 'package:flutter_sample/presentation/screens/photo/store/photo_store.dart';
 import 'package:flutter_sample/presentation/views/action_button.dart';

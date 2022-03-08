@@ -1,6 +1,4 @@
-
 class Photo {
-
   final String id;
   final String image;
   final String thumbnail;
@@ -24,7 +22,6 @@ class Photo {
     if (other.runtimeType != runtimeType) {
       return false;
     }
-    return other is Photo
-        && other.id == id;
+    return other is Photo && other.id == id;
   }
 }

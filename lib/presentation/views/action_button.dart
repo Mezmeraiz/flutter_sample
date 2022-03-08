@@ -5,7 +5,8 @@ class ActionButton extends StatelessWidget {
   final VoidCallback? onTap;
   final String title;
 
-  const ActionButton({Key? key, required this.title,  this.onTap}) : super(key: key);
+  const ActionButton({Key? key, required this.title, this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +17,9 @@ class ActionButton extends StatelessWidget {
         height: 50,
         child: Center(
             child: Text(
-              title,
-              style: const TextStyle(color: Colors.white),
-            )),
+          title,
+          style: const TextStyle(color: Colors.white),
+        )),
       ),
     );
   }

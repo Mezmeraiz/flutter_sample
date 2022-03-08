@@ -6,11 +6,9 @@ part 'map_store.g.dart';
 class MapStore = MapStoreBase with _$MapStore;
 
 abstract class MapStoreBase with Store {
-
   @observable
   LatLng? markerPosition;
 
   @action
   onTapMap(LatLng latLng) => markerPosition = latLng;
-
 }

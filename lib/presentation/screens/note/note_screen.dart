@@ -1,16 +1,9 @@
-import 'dart:math';
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_sample/common/inits.dart';
-import 'package:flutter_sample/domain/entities/photo.dart';
 import 'package:flutter_sample/presentation/screens/note/note_list_item.dart';
 import 'package:flutter_sample/presentation/screens/note/store/note_store.dart';
-import 'package:flutter_sample/presentation/screens/photo/photo_list_item.dart';
-import 'package:flutter_sample/presentation/screens/photo/store/photo_store.dart';
-import 'package:flutter_sample/presentation/screens/photo_info/photo_info_screen.dart';
-import 'package:flutter_svg/svg.dart';
 
 class NoteScreen extends StatefulWidget {
   static const route = "saved";
@@ -23,7 +16,6 @@ class NoteScreen extends StatefulWidget {
 
 class NoteScreenState extends State<NoteScreen>
     with AutomaticKeepAliveClientMixin<NoteScreen> {
-
   late final NoteStore _noteStore;
 
   @override
@@ -36,7 +28,7 @@ class NoteScreenState extends State<NoteScreen>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Note"),
+          title: const Text("Notes"),
         ),
         body: Observer(
           builder: (_) {
@@ -46,8 +38,7 @@ class NoteScreenState extends State<NoteScreen>
                   return NoteListItem(position: index);
                 });
           },
-        )
-    );
+        ));
   }
 
   @override
