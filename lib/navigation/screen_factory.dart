@@ -18,6 +18,8 @@ import 'package:flutter_sample/presentation/screens/note_info/note_info_screen.d
 import 'package:flutter_sample/presentation/screens/photo/photo_screen.dart';
 import 'package:flutter_sample/presentation/screens/photo/store/photo_store.dart';
 import 'package:flutter_sample/presentation/screens/photo_info/photo_info_screen.dart';
+import 'package:flutter_sample/presentation/screens/profile/profile_screen.dart';
+import 'package:flutter_sample/presentation/screens/profile/store/profile_store.dart';
 import 'package:flutter_sample/presentation/screens/save_note/save_note_screen.dart';
 import 'package:flutter_sample/presentation/screens/tab/tab_screen.dart';
 import 'package:flutter_sample/presentation/screens/user/store/user_store.dart';
@@ -85,5 +87,12 @@ class ScreenFactory {
 
   Widget makeNoteInfoScreen(Note note) {
     return NoteInfoScreen(note: note);
+  }
+
+  Widget makeProfileScreen() {
+    return Provider(
+      create: (_) => ProfileStore(),
+      child: const ProfileScreen(),
+    );
   }
 }

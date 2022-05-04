@@ -33,36 +33,27 @@ class _SaveNoteScreenState extends State<SaveNoteScreen> {
   Widget build(BuildContext context) {
     var selectedPhotosList = _photoStore.selectedPhotos.toList();
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Save User"),
-      ),
+      appBar: AppBar(title: const Text("Save User")),
       body: Column(
         children: [
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             child: Column(
               children: [
-                const SizedBox(
-                  height: 16,
-                ),
-                const Text(
+                const SizedBox(height: 16),
+                Text(
                   "Location",
-                  style: blackStylePrimary,
+                  style: Theme.of(context).textTheme.headline1,
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
                 Text(
                   "${_mapStore.markerPosition?.latitude} ${_mapStore.markerPosition?.longitude}",
-                  style: blackStyleSecondary,
+                  style:Theme.of(context).textTheme.subtitle1,
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
               ],
             ),
-            onTap: () =>
-                _userRouterStore.currentAction = UserRouterAction.backToMap,
+            onTap: () => _userRouterStore.currentAction = UserRouterAction.backToMap,
           ),
           GestureDetector(
             child: SizedBox(
@@ -83,16 +74,18 @@ class _SaveNoteScreenState extends State<SaveNoteScreen> {
                     );
                   }),
             ),
-            onTap: () =>
-                _userRouterStore.currentAction = UserRouterAction.backToPhoto,
+            onTap: () => _userRouterStore.currentAction = UserRouterAction.backToPhoto,
           ),
           Expanded(
-              child: Container(
-            alignment: Alignment.bottomCenter,
-            padding: const EdgeInsets.all(16),
-            child: ActionButton(
-                title: "Сохранить", onTap: () => _userRouterStore.saveNote()),
-          ))
+            child: Container(
+              alignment: Alignment.bottomCenter,
+              padding: const EdgeInsets.all(16),
+              child: ActionButton(
+                title: "Сохранить",
+                onTap: () => _userRouterStore.saveNote(),
+              ),
+            ),
+          )
         ],
       ),
     );

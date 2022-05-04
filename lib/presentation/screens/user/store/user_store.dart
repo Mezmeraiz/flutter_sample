@@ -1,12 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_sample/domain/entities/user.dart';
 import 'package:flutter_sample/domain/users_interactor.dart';
+import 'package:flutter_sample/presentation/common/base_store.dart';
 import 'package:mobx/mobx.dart';
 
 part 'user_store.g.dart';
 
 class UserStore = UserStoreBase with _$UserStore;
 
-abstract class UserStoreBase with Store {
+abstract class UserStoreBase extends BaseStore with Store {
   final String? _gender;
 
   final UsersInteractor _userInteractor;
@@ -20,6 +22,11 @@ abstract class UserStoreBase with Store {
 
   @action
   getUsers() async {
-    users.addAll(await _userInteractor.getUsersByGender(_gender));
+    try {
+      users.addAll(await _userInteractor.getUsersByGender(_gender));
+      showContent();
+    } on DioError catch (e) {
+      showError(errorText: e.message);
+    }
   }
 }

@@ -18,40 +18,30 @@ class _NoteInfoScreenState extends State<NoteInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Note Info"),
-      ),
+      appBar: AppBar(title: const Text("Note Info")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "Name",
-              style: blackStylePrimary,
+              style: Theme.of(context).textTheme.headline1,
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             Text(
               "${widget.note.firstName} ${widget.note.lastName}",
-              style: blackStyleSecondary,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
-            const SizedBox(
-              height: 16,
-            ),
-            const Text("Location", style: blackStylePrimary),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
+            Text("Location", style: Theme.of(context).textTheme.headline1),
+            const SizedBox(height: 16),
             Text(
               "${widget.note.latitude} ${widget.note.longitude}",
-              style: blackStyleSecondary,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
             if (widget.note.photos.isNotEmpty) ...[
-              const SizedBox(
-                height: 16,
-              ),
+              const SizedBox(height: 16),
               SizedBox(
                 height: 100,
                 child: ListView.builder(
@@ -61,12 +51,10 @@ class _NoteInfoScreenState extends State<NoteInfoScreen> {
                       return AspectRatio(
                         aspectRatio: 1,
                         child: GestureDetector(
-                          onTap: () => Navigator.pushNamed(
-                              context, PhotoInfoScreen.route,
+                          onTap: () => Navigator.pushNamed(context, PhotoInfoScreen.route,
                               arguments: widget.note.photos[index]),
                           child: CachedNetworkImage(
-                              fadeOutDuration:
-                                  const Duration(milliseconds: 100),
+                              fadeOutDuration: const Duration(milliseconds: 100),
                               fadeInDuration: const Duration(milliseconds: 100),
                               imageUrl: widget.note.photos[index].thumbnail,
                               width: double.infinity,

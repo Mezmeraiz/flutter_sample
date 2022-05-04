@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart' hide Router;
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_sample/common/app_theme.dart';
 import 'package:flutter_sample/common/inits.dart';
 import 'package:flutter_sample/domain/notes_interactor.dart';
+import 'package:flutter_sample/generated/l10n.dart';
 import 'package:flutter_sample/navigation/main_router/main_router_delegate.dart';
 import 'package:flutter_sample/navigation/main_router/main_router_parser.dart';
 import 'package:flutter_sample/navigation/main_router/main_router_store.dart';
@@ -46,9 +48,17 @@ class SampleAppState extends State<SampleApp> {
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
           title: 'Flutter Sample',
-          theme: appTheme,
+          theme: LightTheme.data,
           routerDelegate: mainRouterDelegate,
           routeInformationParser: mainRouterParser,
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
         ));
   }
+
 }

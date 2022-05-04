@@ -29,8 +29,7 @@ class PhotoScreenState extends State<PhotoScreen> {
     _userRouterStore = context.read<UserRouterStore>();
     _scrollController = ScrollController();
     _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
+      if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
         context.read<PhotoStore>().getPhotos();
       }
     });
@@ -41,9 +40,8 @@ class PhotoScreenState extends State<PhotoScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Photos"),
-        leading: BackButton(
-            onPressed: () =>
-                _userRouterStore.currentAction = UserRouterAction.close),
+        leading:
+            BackButton(onPressed: () => _userRouterStore.currentAction = UserRouterAction.close),
       ),
       body: Stack(
         children: [
@@ -55,11 +53,8 @@ class PhotoScreenState extends State<PhotoScreen> {
                       controller: _scrollController,
                       padding: const EdgeInsets.all(16),
                       itemCount: _photoStore.photos.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithMaxCrossAxisExtent(
-                              maxCrossAxisExtent: 200,
-                              crossAxisSpacing: 20,
-                              mainAxisSpacing: 20),
+                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 200, crossAxisSpacing: 20, mainAxisSpacing: 20),
                       itemBuilder: (BuildContext context, int index) {
                         return PhotoListItem(position: index);
                       }),
@@ -70,8 +65,7 @@ class PhotoScreenState extends State<PhotoScreen> {
                     bottom: _photoStore.selectedPhotos.isNotEmpty ? 16 : -100,
                     child: ActionButton(
                         title: "Далее",
-                        onTap: () => _userRouterStore.currentAction =
-                            UserRouterAction.next),
+                        onTap: () => _userRouterStore.currentAction = UserRouterAction.next),
                   )
                 ],
               );

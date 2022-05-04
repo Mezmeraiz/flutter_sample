@@ -16,6 +16,7 @@ abstract class NoteStoreBase with Store {
   @observable
   var notes = ObservableList<Note>();
 
+  @action
   fetchNotes() async {
     final notes = await notesInteractor.getNotes();
     this.notes.clear();

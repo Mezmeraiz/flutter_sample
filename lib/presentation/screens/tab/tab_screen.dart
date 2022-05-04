@@ -34,7 +34,7 @@ class MainPresentationState extends State<TabScreen>
                 floating: true,
                 pinned: true,
                 title: Text("TabScreen"),
-                bottom: TabBar(indicatorColor: colorWhite, tabs: [
+                bottom: TabBar(indicatorColor: Colors.white, tabs: [
                   Tab(text: "All"),
                   Tab(text: "Male"),
                   Tab(text: "Female"),

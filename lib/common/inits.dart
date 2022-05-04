@@ -1,5 +1,6 @@
 
 import 'package:dio/dio.dart';
+import 'package:flutter_sample/data/api/error_api.dart';
 import 'package:flutter_sample/data/api/photos_api.dart';
 import 'package:flutter_sample/data/api/users_api.dart';
 import 'package:flutter_sample/data/db/db.dart';
@@ -43,11 +44,12 @@ registerDatabase() async {
 registerApi() {
   sl.registerLazySingleton<UsersApi>(() => UsersApi(sl<Dio>()));
   sl.registerLazySingleton<PhotosApi>(() => PhotosApi(sl<Dio>()));
+  sl.registerLazySingleton<ErrorApi>(() => ErrorApi(sl<Dio>()));
 }
 
 registerRepository() {
   sl.registerLazySingleton<UsersRepository>(
-      () => UsersRepositoryImpl(usersApi: sl()));
+      () => UsersRepositoryImpl(usersApi: sl<UsersApi>(), errorApi: sl<ErrorApi>()));
   sl.registerLazySingleton<PhotosRepository>(
       () => PhotosRepositoryImpl(photosApi: sl<PhotosApi>()));
   sl.registerLazySingleton<NotesRepository>(

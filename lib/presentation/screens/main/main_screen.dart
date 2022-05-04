@@ -21,6 +21,12 @@ class MainPresentationState extends State<MainScreen> {
   late final List<Widget> _pages;
 
   @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+  }
+
+  @override
   void initState() {
     super.initState();
     _screenFactory = sl<ScreenFactory>();
@@ -28,6 +34,7 @@ class MainPresentationState extends State<MainScreen> {
     _pages = [
       _screenFactory.makeTabScreen(),
       _screenFactory.makeNoteScreen(),
+      _screenFactory.makeTabScreen(),
     ];
   }
 
@@ -57,6 +64,7 @@ class MainPresentationState extends State<MainScreen> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.group), label: "Users"),
           BottomNavigationBarItem(icon: Icon(Icons.save), label: "Notes"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
       ),
     );

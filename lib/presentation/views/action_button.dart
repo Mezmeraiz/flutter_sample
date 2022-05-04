@@ -13,7 +13,7 @@ class ActionButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        color: colorPrimary,
+        color: Theme.of(context).primaryColor,
         height: 50,
         child: Center(
             child: Text(

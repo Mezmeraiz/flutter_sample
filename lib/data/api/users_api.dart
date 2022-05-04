@@ -18,4 +18,5 @@ abstract class UsersApi {
     @Query("results") int results, {
     @Query("gender") String? gender,
   });
+
 }

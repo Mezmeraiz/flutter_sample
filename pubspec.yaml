@@ -29,7 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_localizations:
+    sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -46,6 +47,7 @@ dependencies:
   geolocator: ^8.2.0
   google_maps_flutter: ^2.1.1
   sqflite: ^2.0.2
+  intl: ^0.17.0
 
 
 dev_dependencies:
@@ -73,11 +75,23 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   assets:
     - assets/icons/
+    - assets/fonts/
     - assets/db/create/
 
+
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/openSans_regular.ttf
+          weight: 400
+        - asset: assets/fonts/openSans_semibold.ttf
+          weight: 600
+        - asset: assets/fonts/openSans_bold.ttf
+          weight: 700
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -108,3 +122,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  enabled: true

@@ -25,32 +25,32 @@ class NoteListItem extends StatelessWidget {
           top: 16,
         ),
         decoration: BoxDecoration(
-            color: colorCard, borderRadius: BorderRadius.circular(4)),
+            color: Theme.of(context).cardColor, borderRadius: BorderRadius.circular(4)),
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "Name",
-              style: blackStylePrimary,
+              style: Theme.of(context).textTheme.headline1,
             ),
             const SizedBox(
               height: 16,
             ),
             Text(
               "${note.firstName} ${note.lastName}",
-              style: blackStyleSecondary,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
             const SizedBox(
               height: 16,
             ),
-            const Text("Location", style: blackStylePrimary),
+            Text("Location", style: Theme.of(context).textTheme.headline1),
             const SizedBox(
               height: 16,
             ),
             Text(
               "${note.latitude} ${note.longitude}",
-              style: blackStyleSecondary,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
             if (note.photos.isNotEmpty) ...[
               const SizedBox(
