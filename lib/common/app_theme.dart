@@ -24,10 +24,12 @@ class LightTheme {
     headline1: TextStyle(
       fontWeight: FontWeight.normal,
       color: _colorTextPrimary,
+      fontSize: 14,
     ),
     subtitle1: TextStyle(
       fontWeight: FontWeight.normal,
       color: _colorTextSecondary,
+      fontSize: 14,
     ),
   );
 

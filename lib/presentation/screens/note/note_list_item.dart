@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/common/colors.dart';
-import 'package:flutter_sample/common/styles.dart';
 import 'package:flutter_sample/presentation/screens/note/store/note_store.dart';
 import 'package:flutter_sample/presentation/screens/note_info/note_info_screen.dart';
 import 'package:provider/provider.dart';
