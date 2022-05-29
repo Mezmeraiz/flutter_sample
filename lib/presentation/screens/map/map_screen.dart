@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_sample/navigation/user_router/user_router_store.dart';
+import 'package:flutter_sample/navigation/custom_user_router/user_router_store.dart';
 import 'package:flutter_sample/presentation/screens/map/store/map_store.dart';
 import 'package:flutter_sample/presentation/stores/geo_store.dart';
 import 'package:flutter_sample/presentation/views/action_button.dart';
@@ -58,8 +58,7 @@ class _MapScreenState extends State<MapScreen> {
                 bottom: _mapStore.markerPosition != null ? 16 : -100,
                 child: ActionButton(
                     title: "Далее",
-                    onTap: () =>
-                        _userRouterStore.currentAction = UserRouterAction.next))
+                    onTap: () => _userRouterStore.currentAction = UserRouterAction.next))
           ],
         );
       }),
@@ -68,11 +67,7 @@ class _MapScreenState extends State<MapScreen> {
 
   getMarkers() {
     var markers = _mapStore.markerPosition != null
-        ? {
-            Marker(
-                markerId: const MarkerId("marker_id"),
-                position: _mapStore.markerPosition!)
-          }
+        ? {Marker(markerId: const MarkerId("marker_id"), position: _mapStore.markerPosition!)}
         : <Marker>{};
     return markers;
   }

@@ -1,7 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/domain/entities/note.dart';
-import 'package:flutter_sample/presentation/screens/photo_info/photo_info_screen.dart';
+import 'package:flutter_sample/navigation/main_router.dart';
+import 'package:go_router/go_router.dart';
 
 class NoteInfoScreen extends StatefulWidget {
   static const route = "note_info";
@@ -25,31 +26,19 @@ class _NoteInfoScreenState extends State<NoteInfoScreen> with TickerProviderStat
           children: [
             Text(
               "Name",
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .headline1,
+              style: Theme.of(context).textTheme.headline1,
             ),
             const SizedBox(height: 16),
             Text(
               "${widget.note.firstName} ${widget.note.lastName}",
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .subtitle1,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
             const SizedBox(height: 16),
-            Text("Location", style: Theme
-                .of(context)
-                .textTheme
-                .headline1),
+            Text("Location", style: Theme.of(context).textTheme.headline1),
             const SizedBox(height: 16),
             Text(
               "${widget.note.latitude} ${widget.note.longitude}",
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .subtitle1,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
             if (widget.note.photos.isNotEmpty) ...[
               const SizedBox(height: 16),
@@ -62,8 +51,8 @@ class _NoteInfoScreenState extends State<NoteInfoScreen> with TickerProviderStat
                       return AspectRatio(
                         aspectRatio: 1,
                         child: GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, PhotoInfoScreen.route,
-                              arguments: widget.note.photos[index]),
+                          onTap: () => context.pushNamed(RouteName.photoInfo,
+                              extra: widget.note.photos[index]),
                           child: CachedNetworkImage(
                               fadeOutDuration: const Duration(milliseconds: 100),
                               fadeInDuration: const Duration(milliseconds: 100),

@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/common/colors.dart';
+import 'package:flutter_sample/navigation/main_router.dart';
 import 'package:flutter_sample/presentation/screens/note/store/note_store.dart';
-import 'package:flutter_sample/presentation/screens/note_info/note_info_screen.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class NoteListItem extends StatelessWidget {
@@ -15,14 +15,9 @@ class NoteListItem extends StatelessWidget {
     var noteStore = context.read<NoteStore>();
     var note = noteStore.notes[position];
     return GestureDetector(
-      onTap: () =>
-          Navigator.pushNamed(context, NoteInfoScreen.route, arguments: note),
+      onTap: () => context.pushNamed(RouteName.noteInfo, extra: note),
       child: Container(
-        margin: const EdgeInsets.only(
-          left: 16,
-          right: 16,
-          top: 16,
-        ),
+        margin: const EdgeInsets.only(left: 16, right: 16, top: 16),
         decoration: BoxDecoration(
             color: Theme.of(context).cardColor, borderRadius: BorderRadius.circular(4)),
         padding: const EdgeInsets.all(16),
@@ -33,28 +28,20 @@ class NoteListItem extends StatelessWidget {
               "Name",
               style: Theme.of(context).textTheme.headline1,
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             Text(
               "${note.firstName} ${note.lastName}",
               style: Theme.of(context).textTheme.subtitle1,
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             Text("Location", style: Theme.of(context).textTheme.headline1),
-            const SizedBox(
-              height: 16,
-            ),
+            const SizedBox(height: 16),
             Text(
               "${note.latitude} ${note.longitude}",
               style: Theme.of(context).textTheme.subtitle1,
             ),
             if (note.photos.isNotEmpty) ...[
-              const SizedBox(
-                height: 16,
-              ),
+              const SizedBox(height: 16),
               SizedBox(
                 height: 100,
                 child: ListView.builder(

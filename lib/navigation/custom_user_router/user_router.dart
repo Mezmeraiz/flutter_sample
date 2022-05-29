@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_sample/common/inits.dart';
+import 'package:flutter_sample/navigation/custom_user_router/user_router_store.dart';
 import 'package:flutter_sample/navigation/screen_factory.dart';
-import 'package:flutter_sample/navigation/user_router/user_router_store.dart';
-import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 
 class UserRouter extends StatefulWidget {
@@ -27,20 +26,18 @@ class UserRouterState extends State<UserRouter> {
     super.initState();
     _screenFactory = sl<ScreenFactory>();
     _userRouterStore = context.read<UserRouterStore>();
-    when((_) => _userRouterStore.currentAction == UserRouterAction.close,
-        () => Navigator.pop(context));
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(child: Observer(builder: (_) {
-      return Navigator(
-        onPopPage: _onPopPage,
-        pages: buildPages(),
-      );
-    }), onWillPop: () {
-      return popRoute();
-    });
+    return WillPopScope(
+        child: Observer(builder: (_) {
+          return Navigator(
+            onPopPage: _onPopPage,
+            pages: buildPages(),
+          );
+        }),
+        onWillPop: () => popRoute());
   }
 
   List<Page> buildPages() {

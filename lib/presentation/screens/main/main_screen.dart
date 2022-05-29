@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/common/inits.dart';
-import 'package:flutter_sample/navigation/main_router/main_router_configuration.dart';
-import 'package:flutter_sample/navigation/main_router/main_router_store.dart';
+import 'package:flutter_sample/navigation/main_router.dart';
 import 'package:flutter_sample/navigation/screen_factory.dart';
-import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 class MainScreen extends StatefulWidget {
   static const route = "main";
-  int currentIndex;
+  final int currentIndex;
 
-  MainScreen({Key? key, required this.currentIndex}) : super(key: key);
+  const MainScreen({Key? key, required this.currentIndex}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => MainPresentationState();
@@ -21,12 +20,6 @@ class MainPresentationState extends State<MainScreen> {
   late final List<Widget> _pages;
 
   @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-  }
-
-  @override
   void initState() {
     super.initState();
     _screenFactory = sl<ScreenFactory>();
@@ -34,7 +27,7 @@ class MainPresentationState extends State<MainScreen> {
     _pages = [
       _screenFactory.makeTabScreen(),
       _screenFactory.makeNoteScreen(),
-      _screenFactory.makeTabScreen(),
+      _screenFactory.makeProfileScreen(),
     ];
   }
 
@@ -58,9 +51,7 @@ class MainPresentationState extends State<MainScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: widget.currentIndex,
         type: BottomNavigationBarType.fixed,
-        onTap: (index) => context
-            .read<MainRouterStore>()
-            .setNewConfiguration(MainRouterConfiguration.main(index)),
+        onTap: (index) => context.goNamed(RouteName.main, params: {"tab": index.toString()}),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.group), label: "Users"),
           BottomNavigationBarItem(icon: Icon(Icons.save), label: "Notes"),

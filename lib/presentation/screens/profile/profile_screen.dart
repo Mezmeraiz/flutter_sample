@@ -11,7 +11,11 @@ class ProfileScreenState extends State<ProfileScreen> with AutomaticKeepAliveCli
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Profile"),
+      ),
+    );
   }
 
   @override

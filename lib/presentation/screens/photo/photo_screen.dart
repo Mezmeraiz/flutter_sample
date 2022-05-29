@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_sample/navigation/user_router/user_router_store.dart';
+import 'package:flutter_sample/navigation/custom_user_router/user_router_store.dart';
 import 'package:flutter_sample/presentation/screens/photo/photo_list_item.dart';
 import 'package:flutter_sample/presentation/screens/photo/store/photo_store.dart';
 import 'package:flutter_sample/presentation/views/action_button.dart';
+import 'package:go_router/go_router.dart';
 
 class PhotoScreen extends StatefulWidget {
   static const route = "photo";
@@ -40,8 +41,7 @@ class PhotoScreenState extends State<PhotoScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Photos"),
-        leading:
-            BackButton(onPressed: () => _userRouterStore.currentAction = UserRouterAction.close),
+        leading: BackButton(onPressed: context.pop),
       ),
       body: Stack(
         children: [

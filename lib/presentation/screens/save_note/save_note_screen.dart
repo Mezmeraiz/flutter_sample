@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/navigation/user_router/user_router_store.dart';
+import 'package:flutter_sample/navigation/custom_user_router/user_router_store.dart';
 import 'package:flutter_sample/presentation/screens/map/store/map_store.dart';
 import 'package:flutter_sample/presentation/screens/photo/store/photo_store.dart';
 import 'package:flutter_sample/presentation/views/action_button.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class SaveNoteScreen extends StatefulWidget {
@@ -47,7 +48,7 @@ class _SaveNoteScreenState extends State<SaveNoteScreen> {
                 const SizedBox(height: 16),
                 Text(
                   "${_mapStore.markerPosition?.latitude} ${_mapStore.markerPosition?.longitude}",
-                  style:Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.subtitle1,
                 ),
                 const SizedBox(height: 16),
               ],
@@ -81,7 +82,10 @@ class _SaveNoteScreenState extends State<SaveNoteScreen> {
               padding: const EdgeInsets.all(16),
               child: ActionButton(
                 title: "Сохранить",
-                onTap: () => _userRouterStore.saveNote(),
+                onTap: () async {
+                  final note = await _userRouterStore.saveNote();
+                  context.go("/main/1/noteInfo", extra: note);
+                },
               ),
             ),
           )

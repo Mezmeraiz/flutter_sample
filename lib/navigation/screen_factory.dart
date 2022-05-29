@@ -6,9 +6,8 @@ import 'package:flutter_sample/domain/entities/user.dart';
 import 'package:flutter_sample/domain/notes_interactor.dart';
 import 'package:flutter_sample/domain/photos_interactor.dart';
 import 'package:flutter_sample/domain/users_interactor.dart';
-import 'package:flutter_sample/navigation/main_router/main_router_store.dart';
-import 'package:flutter_sample/navigation/user_router/user_router.dart';
-import 'package:flutter_sample/navigation/user_router/user_router_store.dart';
+import 'package:flutter_sample/navigation/custom_user_router/user_router.dart';
+import 'package:flutter_sample/navigation/custom_user_router/user_router_store.dart';
 import 'package:flutter_sample/presentation/screens/main/main_screen.dart';
 import 'package:flutter_sample/presentation/screens/map/map_screen.dart';
 import 'package:flutter_sample/presentation/screens/map/store/map_store.dart';
@@ -69,7 +68,6 @@ class ScreenFactory {
               photoStore: photoStore,
               mapStore: mapStore,
               noteStore: context.read<NoteStore>(),
-              mainRouterStore: context.read<MainRouterStore>(),
               notesInteractor: sl<NotesInteractor>()),
         )
       ],

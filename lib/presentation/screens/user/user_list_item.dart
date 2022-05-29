@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/navigation/user_router/user_router.dart';
+import 'package:flutter_sample/navigation/main_router.dart';
 import 'package:flutter_sample/presentation/screens/user/store/user_store.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class UserListItem extends StatelessWidget {
@@ -14,8 +15,7 @@ class UserListItem extends StatelessWidget {
     var user = userStore.users[position];
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () =>
-          Navigator.pushNamed(context, UserRouter.route, arguments: user),
+      onTap: () => context.pushNamed(RouteName.userRouter, extra: user),
       child: Column(
         children: [
           Row(
