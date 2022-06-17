@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/domain/entities/user.dart';
 import 'package:flutter_sample/navigation/main_router.dart';
-import 'package:flutter_sample/presentation/screens/user/store/user_store.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class UserListItem extends StatelessWidget {
-  final int position;
+  final User user;
 
-  const UserListItem({Key? key, required this.position}) : super(key: key);
+  const UserListItem({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var userStore = context.read<UserStore>();
-    var user = userStore.users[position];
+    //var userStore = context.read<UserStore>();
+    //var user = userStore.users[position];
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () => context.pushNamed(RouteName.userRouter, extra: user),

@@ -4,17 +4,11 @@ import 'package:flutter_sample/domain/entities/note.dart';
 import 'package:flutter_sample/navigation/main_router.dart';
 import 'package:go_router/go_router.dart';
 
-class NoteInfoScreen extends StatefulWidget {
-  static const route = "note_info";
+class NoteInfoScreen extends StatelessWidget {
   final Note note;
 
   const NoteInfoScreen({Key? key, required this.note}) : super(key: key);
 
-  @override
-  _NoteInfoScreenState createState() => _NoteInfoScreenState();
-}
-
-class _NoteInfoScreenState extends State<NoteInfoScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,39 +24,44 @@ class _NoteInfoScreenState extends State<NoteInfoScreen> with TickerProviderStat
             ),
             const SizedBox(height: 16),
             Text(
-              "${widget.note.firstName} ${widget.note.lastName}",
+              "${note.firstName} ${note.lastName}",
               style: Theme.of(context).textTheme.subtitle1,
             ),
-            const SizedBox(height: 16),
-            Text("Location", style: Theme.of(context).textTheme.headline1),
             const SizedBox(height: 16),
             Text(
-              "${widget.note.latitude} ${widget.note.longitude}",
+              "Location",
+              style: Theme.of(context).textTheme.headline1,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              "${note.latitude} ${note.longitude}",
               style: Theme.of(context).textTheme.subtitle1,
             ),
-            if (widget.note.photos.isNotEmpty) ...[
+            if (note.photos.isNotEmpty) ...[
               const SizedBox(height: 16),
               SizedBox(
                 height: 100,
                 child: ListView.builder(
-                    itemCount: widget.note.photos.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (_, index) {
-                      return AspectRatio(
-                        aspectRatio: 1,
-                        child: GestureDetector(
-                          onTap: () => context.pushNamed(RouteName.photoInfo,
-                              extra: widget.note.photos[index]),
-                          child: CachedNetworkImage(
-                              fadeOutDuration: const Duration(milliseconds: 100),
-                              fadeInDuration: const Duration(milliseconds: 100),
-                              imageUrl: widget.note.photos[index].thumbnail,
-                              width: double.infinity,
-                              height: double.infinity,
-                              fit: BoxFit.cover),
+                  itemCount: note.photos.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (_, index) {
+                    return AspectRatio(
+                      aspectRatio: 1,
+                      child: GestureDetector(
+                        onTap: () =>
+                            context.pushNamed(RouteName.photoInfo, extra: note.photos[index]),
+                        child: CachedNetworkImage(
+                          fadeOutDuration: const Duration(milliseconds: 100),
+                          fadeInDuration: const Duration(milliseconds: 100),
+                          imageUrl: note.photos[index].thumbnail,
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
                         ),
-                      );
-                    }),
+                      ),
+                    );
+                  },
+                ),
               )
             ]
           ],

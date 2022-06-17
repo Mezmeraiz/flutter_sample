@@ -1,59 +1,67 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_sample/common/inits.dart';
-import 'package:flutter_sample/navigation/custom_user_router/user_router_store.dart';
-import 'package:flutter_sample/navigation/screen_factory.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_sample/data/user_router_repository.dart';
+import 'package:flutter_sample/data/user_router_repository_impl.dart';
+import 'package:flutter_sample/domain/entities/user.dart';
+import 'package:flutter_sample/navigation/custom_user_router/user_router_bloc.dart';
+import 'package:flutter_sample/presentation/screens/map/map_screen.dart';
+import 'package:flutter_sample/presentation/screens/photo/photo_screen.dart';
+import 'package:flutter_sample/presentation/screens/save_note/save_note_screen.dart';
 import 'package:provider/provider.dart';
 
-class UserRouter extends StatefulWidget {
+class UserRouter extends StatelessWidget {
   static const route = "user_router";
 
-  const UserRouter({Key? key}) : super(key: key);
+  const UserRouter({Key? key, required this.user}) : super(key: key);
+
+  final User user;
 
   @override
-  UserRouterState createState() => UserRouterState();
+  Widget build(BuildContext context) {
+    return Provider<UserRouterRepository>(
+      create: (context) => UserRouterRepositoryImpl(user: user),
+      child: BlocProvider<UserRouterBloc>(
+        create: (context) => UserRouterBloc(),
+        child: UserRouterView(),
+      ),
+    );
+  }
 }
 
-class UserRouterState extends State<UserRouter> {
-  late final ScreenFactory _screenFactory;
-
-  late final UserRouterStore _userRouterStore;
+class UserRouterView extends StatelessWidget {
+  UserRouterView({Key? key}) : super(key: key);
 
   final List<Page> _pages = [];
 
   @override
-  void initState() {
-    super.initState();
-    _screenFactory = sl<ScreenFactory>();
-    _userRouterStore = context.read<UserRouterStore>();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        child: Observer(builder: (_) {
-          return Navigator(
-            onPopPage: _onPopPage,
-            pages: buildPages(),
-          );
-        }),
-        onWillPop: () => popRoute());
+      child: BlocBuilder<UserRouterBloc, UserRouterState>(
+          buildWhen: (p, c) => p.reSelection == c.reSelection,
+          builder: (context, state) {
+            return Navigator(
+              onPopPage: _onPopPage,
+              pages: buildPages(context, state),
+            );
+          },),
+      onWillPop: () => popRoute(context),
+    );
   }
 
-  List<Page> buildPages() {
-    switch (_userRouterStore.currentAction) {
+  List<Page> buildPages(BuildContext context, UserRouterState state) {
+    switch (state.action) {
       case UserRouterAction.initial:
-        addPage(_screenFactory.makePhotoScreen());
+        addPage(const PhotoScreen());
         break;
       case UserRouterAction.next:
         if (_pages.length == 1) {
-          addPage(_screenFactory.makeMapScreen());
-          if (_userRouterStore.reSelection) {
-            addPage(_screenFactory.makeSaveUserScreen());
+          addPage(const MapScreen());
+          if (state.reSelection) {
+            addPage(const SaveNoteScreen());
           }
         } else if (_pages.length == 2) {
-          _userRouterStore.reSelection = true;
-          addPage(_screenFactory.makeSaveUserScreen());
+          context.read<UserRouterBloc>().add(const UserRouterEvent.reSelection(reSelection: true));
+          addPage(const SaveNoteScreen());
         }
         break;
       case UserRouterAction.backToPhoto:
@@ -93,10 +101,12 @@ class UserRouterState extends State<UserRouter> {
     return _pages.length > 1;
   }
 
-  Future<bool> popRoute() {
+  Future<bool> popRoute(BuildContext context) {
     if (canPop()) {
       pop();
-      _userRouterStore.currentAction = UserRouterAction.rebuild;
+      context
+          .read<UserRouterBloc>()
+          .add(const UserRouterEvent.action(action: UserRouterAction.rebuild));
       return Future.value(false);
     }
     return Future.value(true);

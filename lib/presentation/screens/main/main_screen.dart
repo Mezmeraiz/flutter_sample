@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/common/inits.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sample/navigation/main_router.dart';
-import 'package:flutter_sample/navigation/screen_factory.dart';
+import 'package:flutter_sample/presentation/screens/note/note_screen.dart';
+import 'package:flutter_sample/presentation/screens/tab/tab_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class MainScreen extends StatefulWidget {
-  static const route = "main";
   final int currentIndex;
 
   const MainScreen({Key? key, required this.currentIndex}) : super(key: key);
@@ -15,19 +15,16 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainPresentationState extends State<MainScreen> {
-  late final ScreenFactory _screenFactory;
   late final PageController _pageController;
   late final List<Widget> _pages;
 
   @override
   void initState() {
     super.initState();
-    _screenFactory = sl<ScreenFactory>();
     _pageController = PageController(initialPage: widget.currentIndex);
     _pages = [
-      _screenFactory.makeTabScreen(),
-      _screenFactory.makeNoteScreen(),
-      _screenFactory.makeProfileScreen(),
+      const TabScreen(),
+      const NoteScreen(),
     ];
   }
 
@@ -55,7 +52,6 @@ class MainPresentationState extends State<MainScreen> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.group), label: "Users"),
           BottomNavigationBarItem(icon: Icon(Icons.save), label: "Notes"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
       ),
     );

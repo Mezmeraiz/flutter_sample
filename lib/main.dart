@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart' hide Router;
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_sample/common/app_theme.dart';
 import 'package:flutter_sample/common/inits.dart';
@@ -8,35 +9,40 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await setup();
-  runApp(const SampleApp());
+  runApp(SampleApp(
+    injects: await getInjects(),
+    blocs: getBlocProviders(),
+    mainRouter: MainRouter(),
+  ));
 }
 
-class SampleApp extends StatefulWidget {
-  const SampleApp({Key? key}) : super(key: key);
+class SampleApp extends StatelessWidget {
+  List<Provider> injects;
+  List<BlocProvider> blocs;
+  MainRouter mainRouter;
 
-  @override
-  SampleAppState createState() => SampleAppState();
-}
+  SampleApp({Key? key, required this.injects, required this.blocs, required this.mainRouter})
+      : super(key: key);
 
-class SampleAppState extends State<SampleApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: getStores(),
-        child: MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Sample',
-          theme: LightTheme.data,
-          routeInformationParser: sl<MainRouter>().router.routeInformationParser,
-          routerDelegate: sl<MainRouter>().router.routerDelegate,
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-        ));
+        providers: injects,
+        child: MultiBlocProvider(
+            providers: blocs,
+            child: MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              title: 'Flutter Sample',
+              theme: LightTheme.data,
+              routeInformationParser: mainRouter.router.routeInformationParser,
+              routerDelegate: mainRouter.router.routerDelegate,
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: S.delegate.supportedLocales,
+            )));
   }
 }

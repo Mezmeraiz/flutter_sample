@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sample/common/colors.dart';
 
 class ActionButton extends StatelessWidget {
   final VoidCallback? onTap;
   final String title;
 
-  const ActionButton({Key? key, required this.title, this.onTap})
-      : super(key: key);
+  const ActionButton({Key? key, required this.title, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +14,11 @@ class ActionButton extends StatelessWidget {
         color: Theme.of(context).primaryColor,
         height: 50,
         child: Center(
-            child: Text(
-          title,
-          style: const TextStyle(color: Colors.white),
-        )),
+          child: Text(
+            title,
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
       ),
     );
   }

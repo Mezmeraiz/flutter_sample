@@ -1,15 +1,14 @@
+import 'package:flutter_sample/data/geo_repository.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:mobx/mobx.dart';
 
-part 'geo_store.g.dart';
+class GeoRepositoryImpl implements GeoRepository {
 
-class GeoStore = GeoStoreBase with _$GeoStore;
+  Position? _currentPosition;
 
-abstract class GeoStoreBase with Store {
-  @observable
-  Position? currentPosition;
+  @override
+  get currentPosition => _currentPosition;
 
-  GeoStoreBase() {
+  GeoRepositoryImpl() {
     startLocationUpdates();
   }
 
@@ -23,7 +22,7 @@ abstract class GeoStoreBase with Store {
     );
     Geolocator.getPositionStream(locationSettings: locationSettings)
         .listen((Position? position) {
-      currentPosition = position;
+      _currentPosition = position;
     });
   }
 }

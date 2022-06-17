@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_sample/presentation/screens/user/store/user_store.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_sample/domain/users_interactor.dart';
+import 'package:flutter_sample/presentation/screens/user/bloc/user_bloc.dart';
 import 'package:flutter_sample/presentation/screens/user/user_list_item.dart';
-import 'package:flutter_sample/presentation/views/content_view.dart';
-import 'package:provider/provider.dart';
 
 class UserScreen extends StatefulWidget {
-  const UserScreen({Key? key}) : super(key: key);
+  const UserScreen({Key? key, this.gender}) : super(key: key);
+
+  final String? gender;
 
   @override
   UserScreenState createState() => UserScreenState();
@@ -15,29 +16,30 @@ class UserScreen extends StatefulWidget {
 class UserScreenState extends State<UserScreen> with AutomaticKeepAliveClientMixin<UserScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ContentView<UserStore>(builder: (_) => const ContentWidget()),
+    return BlocProvider(
+      create: (context) => UserBloc(
+        gender: widget.gender,
+        userInteractor: context.read<UsersInteractor>(),
+      )..add(const FetchUserEvent()),
+      child: Scaffold(
+        body: BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) {
+            if (state is InitialUserState) {
+              return const Center(child: CircularProgressIndicator());
+            } else {
+              return ListView.builder(
+                itemCount: state.users.length,
+                itemBuilder: (_, index) {
+                  return UserListItem(user: state.users[index]);
+                },
+              );
+            }
+          },
+        ),
+      ),
     );
   }
 
   @override
   bool get wantKeepAlive => true;
-}
-
-class ContentWidget extends StatelessWidget {
-  const ContentWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final _userStore = context.read<UserStore>();
-    return Observer(
-      builder: (_) {
-        return ListView.builder(
-            itemCount: _userStore.users.length,
-            itemBuilder: (_, index) {
-              return UserListItem(position: index);
-            });
-      },
-    );
-  }
 }

@@ -1,8 +1,11 @@
 import 'package:flutter_sample/domain/entities/note.dart';
-import 'package:flutter_sample/domain/entities/user.dart';
-import 'package:flutter_sample/navigation/screen_factory.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_sample/domain/entities/photo.dart';
+import 'package:flutter_sample/domain/entities/user.dart';
+import 'package:flutter_sample/navigation/custom_user_router/user_router.dart';
+import 'package:flutter_sample/presentation/screens/main/main_screen.dart';
+import 'package:flutter_sample/presentation/screens/note_info/note_info_screen.dart';
+import 'package:flutter_sample/presentation/screens/photo_info/photo_info_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class RouteName {
   static const String main = 'main';
@@ -12,10 +15,6 @@ class RouteName {
 }
 
 class MainRouter {
-  late final ScreenFactory screenFactory;
-
-  MainRouter(this.screenFactory);
-
   late final router = GoRouter(
     debugLogDiagnostics: true,
     routes: [
@@ -26,14 +25,13 @@ class MainRouter {
       GoRoute(
           name: RouteName.main,
           path: '/main/:tab',
-          builder: (context, state) =>
-              screenFactory.makeMainScreen(int.parse(state.params["tab"]!)),
+          builder: (context, state) => MainScreen(currentIndex: int.parse(state.params["tab"]!)),
           routes: [
             GoRoute(
                 path: 'noteInfo',
                 builder: (context, state) {
                   Note note = state.extra as Note;
-                  return screenFactory.makeNoteInfoScreen(note);
+                  return NoteInfoScreen(note: note);
                 }),
           ]),
       GoRoute(
@@ -41,7 +39,7 @@ class MainRouter {
         path: '/noteInfo',
         builder: (context, state) {
           Note note = state.extra as Note;
-          return screenFactory.makeNoteInfoScreen(note);
+          return NoteInfoScreen(note: note);
         },
       ),
       GoRoute(
@@ -49,7 +47,7 @@ class MainRouter {
         path: '/photoInfo',
         builder: (context, state) {
           Photo photo = state.extra as Photo;
-          return screenFactory.makePhotoInfoScreen(photo);
+          return PhotoInfoScreen(photo);
         },
       ),
       GoRoute(
@@ -57,7 +55,7 @@ class MainRouter {
         path: '/userRouter',
         builder: (context, state) {
           User user = state.extra as User;
-          return screenFactory.makeUserRouter(user);
+          return UserRouter(user: user);
         },
       ),
     ],
