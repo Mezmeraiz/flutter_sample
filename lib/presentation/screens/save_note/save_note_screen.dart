@@ -1,13 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sample/data/user_router_repository.dart';
 import 'package:flutter_sample/domain/notes_interactor.dart';
 import 'package:flutter_sample/navigation/custom_user_router/user_router_bloc.dart';
+import 'package:flutter_sample/navigation/main_router.dart';
 import 'package:flutter_sample/presentation/screens/note/bloc/note_bloc.dart';
 import 'package:flutter_sample/presentation/screens/save_note/bloc/save_note_bloc.dart';
 import 'package:flutter_sample/presentation/views/action_button.dart';
-import 'package:go_router/go_router.dart';
 
 class SaveNoteScreen extends StatelessWidget {
   const SaveNoteScreen({Key? key}) : super(key: key);
@@ -35,7 +36,7 @@ class SaveNoteScreenView extends StatelessWidget {
         listenWhen: (p, c) => c is DoneSaveNoteState,
         listener: (context, state) {
           context.read<NoteBloc>().add(const FetchNoteEvent());
-          context.go("/main/1/noteInfo", extra: state.note);
+          context.router.replaceAll([MainRoute(currentIndex: 1), NoteInfoRoute(note: state.note!)]);
         },
         child: Column(
           children: [

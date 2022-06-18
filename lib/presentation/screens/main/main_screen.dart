@@ -1,14 +1,14 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sample/navigation/main_router.dart';
 import 'package:flutter_sample/presentation/screens/note/note_screen.dart';
 import 'package:flutter_sample/presentation/screens/tab/tab_screen.dart';
-import 'package:go_router/go_router.dart';
 
 class MainScreen extends StatefulWidget {
   final int currentIndex;
 
-  const MainScreen({Key? key, required this.currentIndex}) : super(key: key);
+  const MainScreen({Key? key, @PathParam('currentIndex') required this.currentIndex})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => MainPresentationState();
@@ -48,7 +48,7 @@ class MainPresentationState extends State<MainScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: widget.currentIndex,
         type: BottomNavigationBarType.fixed,
-        onTap: (index) => context.goNamed(RouteName.main, params: {"tab": index.toString()}),
+        onTap: (index) => context.navigateTo(MainRoute(currentIndex: index)),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.group), label: "Users"),
           BottomNavigationBarItem(icon: Icon(Icons.save), label: "Notes"),

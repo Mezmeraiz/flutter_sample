@@ -1,8 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/domain/entities/user.dart';
 import 'package:flutter_sample/navigation/main_router.dart';
-import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 class UserListItem extends StatelessWidget {
   final User user;
@@ -11,11 +10,9 @@ class UserListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //var userStore = context.read<UserStore>();
-    //var user = userStore.users[position];
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => context.pushNamed(RouteName.userRouter, extra: user),
+      onTap: () => context.pushRoute(UserRouterRoute(user: user)),
       child: Column(
         children: [
           Row(

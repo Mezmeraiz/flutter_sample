@@ -9,10 +9,8 @@ import 'package:flutter_sample/presentation/screens/photo/photo_screen.dart';
 import 'package:flutter_sample/presentation/screens/save_note/save_note_screen.dart';
 import 'package:provider/provider.dart';
 
-class UserRouter extends StatelessWidget {
-  static const route = "user_router";
-
-  const UserRouter({Key? key, required this.user}) : super(key: key);
+class UserRouterScreen extends StatelessWidget {
+  const UserRouterScreen({Key? key, required this.user}) : super(key: key);
 
   final User user;
 
@@ -37,13 +35,14 @@ class UserRouterView extends StatelessWidget {
   Widget build(BuildContext context) {
     return WillPopScope(
       child: BlocBuilder<UserRouterBloc, UserRouterState>(
-          buildWhen: (p, c) => p.reSelection == c.reSelection,
-          builder: (context, state) {
-            return Navigator(
-              onPopPage: _onPopPage,
-              pages: buildPages(context, state),
-            );
-          },),
+        buildWhen: (p, c) => p.reSelection == c.reSelection,
+        builder: (context, state) {
+          return Navigator(
+            onPopPage: _onPopPage,
+            pages: buildPages(context, state),
+          );
+        },
+      ),
       onWillPop: () => popRoute(context),
     );
   }

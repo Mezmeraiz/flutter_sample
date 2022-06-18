@@ -1,8 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/domain/entities/note.dart';
 import 'package:flutter_sample/navigation/main_router.dart';
-import 'package:go_router/go_router.dart';
 
 class NoteListItem extends StatelessWidget {
   final Note note;
@@ -12,7 +12,7 @@ class NoteListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.pushNamed(RouteName.noteInfo, extra: note),
+      onTap: () => context.pushRoute(NoteInfoRoute(note: note)),
       child: Container(
         margin: const EdgeInsets.only(left: 16, right: 16, top: 16),
         decoration: BoxDecoration(

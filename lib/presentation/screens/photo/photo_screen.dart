@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sample/data/user_router_repository.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_sample/navigation/custom_user_router/user_router_bloc.da
 import 'package:flutter_sample/presentation/screens/photo/bloc/PhotoBloc.dart';
 import 'package:flutter_sample/presentation/screens/photo/photo_list_item.dart';
 import 'package:flutter_sample/presentation/views/action_button.dart';
-import 'package:go_router/go_router.dart';
 
 class PhotoScreen extends StatefulWidget {
   const PhotoScreen({Key? key}) : super(key: key);
@@ -42,7 +42,7 @@ class PhotoScreenState extends State<PhotoScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Photos"),
-          leading: BackButton(onPressed: context.pop),
+          leading: BackButton(onPressed: context.popRoute),
         ),
         body: BlocBuilder<PhotoBloc, PhotoState>(
           buildWhen: (p, c) => c is FetchedPhotoState || c is InitialPhotoState,

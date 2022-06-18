@@ -12,7 +12,7 @@ void main() async {
   runApp(SampleApp(
     injects: await getInjects(),
     blocs: getBlocProviders(),
-    mainRouter: MainRouter(),
+    mainRouter: getMainRouter(),
   ));
 }
 
@@ -34,8 +34,8 @@ class SampleApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Flutter Sample',
               theme: LightTheme.data,
-              routeInformationParser: mainRouter.router.routeInformationParser,
-              routerDelegate: mainRouter.router.routerDelegate,
+              routerDelegate: mainRouter.delegate(),
+              routeInformationParser: mainRouter.defaultRouteParser(),
               localizationsDelegates: const [
                 S.delegate,
                 GlobalMaterialLocalizations.delegate,

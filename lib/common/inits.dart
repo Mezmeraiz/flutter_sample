@@ -18,6 +18,7 @@ import 'package:flutter_sample/domain/photos_interactor.dart';
 import 'package:flutter_sample/domain/photos_interactor_impl.dart';
 import 'package:flutter_sample/domain/users_interactor.dart';
 import 'package:flutter_sample/domain/users_interactor_impl.dart';
+import 'package:flutter_sample/navigation/main_router.dart';
 import 'package:flutter_sample/presentation/screens/note/bloc/note_bloc.dart';
 import 'package:flutter_sample/data/geo_repository_impl.dart';
 import 'package:provider/provider.dart';
@@ -62,3 +63,5 @@ List<BlocProvider> getBlocProviders() {
     BlocProvider<NoteBloc>(create: (context) => NoteBloc(notesInteractor: context.read<NotesInteractor>()))
   ];
 }
+
+MainRouter getMainRouter() => MainRouter();
