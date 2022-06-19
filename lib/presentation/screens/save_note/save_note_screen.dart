@@ -36,7 +36,13 @@ class SaveNoteScreenView extends StatelessWidget {
         listenWhen: (p, c) => c is DoneSaveNoteState,
         listener: (context, state) {
           context.read<NoteBloc>().add(const FetchNoteEvent());
-          context.router.replaceAll([MainRoute(currentIndex: 1), NoteInfoRoute(note: state.note!)]);
+          context.router.root.navigate(const TabRouter(children: [
+            TabRoute(),
+          ]));
+          context.router.root.navigate(NoteRouter(children: [
+            const NoteRoute(),
+            NoteInfoRoute(note: state.note!),
+          ]));
         },
         child: Column(
           children: [

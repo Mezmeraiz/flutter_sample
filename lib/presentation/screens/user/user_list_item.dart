@@ -12,7 +12,7 @@ class UserListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => context.pushRoute(UserRouterRoute(user: user)),
+      onTap: () => AutoRouter.of(context).push(UserRouterRoute(user: user)),
       child: Column(
         children: [
           Row(

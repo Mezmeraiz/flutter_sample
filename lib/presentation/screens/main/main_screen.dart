@@ -4,62 +4,34 @@ import 'package:flutter_sample/navigation/main_router.dart';
 import 'package:flutter_sample/presentation/screens/note/note_screen.dart';
 import 'package:flutter_sample/presentation/screens/tab/tab_screen.dart';
 
-class MainScreen extends StatefulWidget {
-  final int currentIndex;
-
-  const MainScreen({Key? key, @PathParam('currentIndex') required this.currentIndex})
-      : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() => MainPresentationState();
-}
-
-class MainPresentationState extends State<MainScreen> {
-  late final PageController _pageController;
-  late final List<Widget> _pages;
-
-  @override
-  void initState() {
-    super.initState();
-    _pageController = PageController(initialPage: widget.currentIndex);
-    _pages = [
-      const TabScreen(),
-      const NoteScreen(),
-    ];
-  }
-
-  @override
-  void didUpdateWidget(covariant MainScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    Future.microtask(() {
-      _pageController.jumpToPage(widget.currentIndex);
-    });
-  }
+class MainScreen extends StatelessWidget {
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: PageView(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: _pages,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: widget.currentIndex,
-        type: BottomNavigationBarType.fixed,
-        onTap: (index) => context.navigateTo(MainRoute(currentIndex: index)),
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.group), label: "Users"),
-          BottomNavigationBarItem(icon: Icon(Icons.save), label: "Notes"),
-        ],
-      ),
+    return AutoTabsRouter(
+      routes: const [
+        TabRouter(),
+        NoteRouter(),
+      ],
+      builder: (context, child, animation) {
+        final tabsRouter = AutoTabsRouter.of(context);
+        return Scaffold(
+          body: FadeTransition(
+            opacity: animation,
+            child: child,
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: tabsRouter.activeIndex,
+            type: BottomNavigationBarType.fixed,
+            onTap: (index) => tabsRouter.setActiveIndex(index),
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.group), label: "Users"),
+              BottomNavigationBarItem(icon: Icon(Icons.save), label: "Notes"),
+            ],
+          ),
+        );
+      },
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _pageController.dispose();
   }
 }
