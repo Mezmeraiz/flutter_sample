@@ -3,7 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sample/data/user_router_repository.dart';
-import 'package:flutter_sample/domain/notes_interactor.dart';
+import 'package:flutter_sample/di/interactor_storage.dart';
 import 'package:flutter_sample/navigation/custom_user_router/user_router_bloc.dart';
 import 'package:flutter_sample/navigation/main_router.dart';
 import 'package:flutter_sample/presentation/screens/note/bloc/note_bloc.dart';
@@ -18,7 +18,7 @@ class SaveNoteScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => SaveNoteBloc(
         userRouterRepository: context.read<UserRouterRepository>(),
-        notesInteractor: context.read<NotesInteractor>(),
+        notesInteractor: context.read<InteractorStorage>().notesInteractor,
       ),
       child: const SaveNoteScreenView(),
     );

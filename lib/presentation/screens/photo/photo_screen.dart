@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sample/data/user_router_repository.dart';
-import 'package:flutter_sample/domain/photos_interactor.dart';
+import 'package:flutter_sample/di/interactor_storage.dart';
 import 'package:flutter_sample/navigation/custom_user_router/user_router_bloc.dart';
 import 'package:flutter_sample/presentation/screens/photo/bloc/PhotoBloc.dart';
 import 'package:flutter_sample/presentation/screens/photo/photo_list_item.dart';
@@ -24,7 +24,7 @@ class PhotoScreenState extends State<PhotoScreen> {
   void initState() {
     super.initState();
     _photoBloc = PhotoBloc(
-      photosInteractor: context.read<PhotosInteractor>(),
+      photosInteractor: context.read<InteractorStorage>().photosInteractor,
       userRouterRepository: context.read<UserRouterRepository>(),
     )..add(const FetchPhotoEvent());
     _scrollController = ScrollController();

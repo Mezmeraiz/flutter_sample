@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_sample/domain/users_interactor.dart';
+import 'package:flutter_sample/di/interactor_storage.dart';
 import 'package:flutter_sample/presentation/screens/user/bloc/user_bloc.dart';
 import 'package:flutter_sample/presentation/screens/user/user_list_item.dart';
 
@@ -19,7 +19,7 @@ class UserScreenState extends State<UserScreen> with AutomaticKeepAliveClientMix
     return BlocProvider(
       create: (context) => UserBloc(
         gender: widget.gender,
-        userInteractor: context.read<UsersInteractor>(),
+        userInteractor: context.read<InteractorStorage>().usersInteractor,
       )..add(const FetchUserEvent()),
       child: Scaffold(
         body: BlocBuilder<UserBloc, UserState>(

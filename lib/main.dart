@@ -1,9 +1,8 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart' hide Router;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_sample/common/app_theme.dart';
-import 'package:flutter_sample/common/inits.dart';
+import 'package:flutter_sample/di/init.dart';
 import 'package:flutter_sample/generated/l10n.dart';
 import 'package:flutter_sample/navigation/main_router.dart';
 import 'package:provider/provider.dart';
