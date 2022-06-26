@@ -6,7 +6,7 @@ import 'package:flutter_sample/di/interactor_storage.dart';
 import 'package:flutter_sample/navigation/custom_user_router/user_router_bloc.dart';
 import 'package:flutter_sample/presentation/screens/photo/bloc/PhotoBloc.dart';
 import 'package:flutter_sample/presentation/screens/photo/photo_list_item.dart';
-import 'package:flutter_sample/presentation/views/action_button.dart';
+import 'package:flutter_sample/presentation/views/next_button.dart';
 
 class PhotoScreen extends StatefulWidget {
   const PhotoScreen({Key? key}) : super(key: key);
@@ -72,17 +72,9 @@ class PhotoScreenState extends State<PhotoScreen> {
                   ),
                   BlocBuilder<PhotoBloc, PhotoState>(
                     buildWhen: (p, c) => c is SelectedPhotoState,
-                    builder: (context, state) => AnimatedPositioned(
-                      duration: const Duration(milliseconds: 500),
-                      left: 16,
-                      right: 16,
-                      bottom: state.selectedPhotos.isNotEmpty ? 16 : -100,
-                      child: ActionButton(
-                        title: "Далее",
-                        onTap: () => context.read<UserRouterBloc>().add(
-                              const UserRouterEvent.action(action: UserRouterAction.next),
-                            ),
-                      ),
+                    builder: (context, state) => NextButton(
+                      isNotEmpty: state.selectedPhotos.isNotEmpty,
+                      onTap: () => _onTapNext(context),
                     ),
                   ),
                 ],
@@ -95,4 +87,8 @@ class PhotoScreenState extends State<PhotoScreen> {
       ),
     );
   }
+
+  void _onTapNext(BuildContext context) => context
+      .read<UserRouterBloc>()
+      .add(const UserRouterEvent.action(action: UserRouterAction.next));
 }

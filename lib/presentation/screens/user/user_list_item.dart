@@ -1,33 +1,24 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/domain/entities/user.dart';
-import 'package:flutter_sample/navigation/main_router.dart';
+import 'package:flutter_sample/presentation/screens/user/user_image.dart';
 
 class UserListItem extends StatelessWidget {
   final User user;
+  final VoidCallback onTap;
 
-  const UserListItem({Key? key, required this.user}) : super(key: key);
+  const UserListItem({Key? key, required this.user, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => AutoRouter.of(context).push(UserRouterRoute(user: user)),
+      onTap: onTap,
       child: Column(
         children: [
           Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Image.network(
-                  user.thumbnail,
-                  width: 50,
-                  height: 50,
-                ),
-              ),
-              Column(
-                children: [Text("${user.firstName} ${user.lastName}")],
-              )
+              UserImage(user: user),
+              Text("${user.firstName} ${user.lastName}"),
             ],
           ),
           const Divider()

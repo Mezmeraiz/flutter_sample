@@ -27,22 +27,24 @@ class SampleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: injects,
-        child: MultiBlocProvider(
-            providers: blocs,
-            child: MaterialApp.router(
-              debugShowCheckedModeBanner: false,
-              title: 'Flutter Sample',
-              theme: LightTheme.data,
-              routerDelegate: mainRouter.delegate(),
-              routeInformationParser: mainRouter.defaultRouteParser(),
-              localizationsDelegates: const [
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: S.delegate.supportedLocales,
-            )));
+      providers: injects,
+      child: MultiBlocProvider(
+        providers: blocs,
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Sample',
+          theme: LightTheme.data,
+          routerDelegate: mainRouter.delegate(),
+          routeInformationParser: mainRouter.defaultRouteParser(),
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+        ),
+      ),
+    );
   }
 }

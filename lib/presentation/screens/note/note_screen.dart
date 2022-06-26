@@ -20,17 +20,20 @@ class NoteScreenState extends State<NoteScreen> with AutomaticKeepAliveClientMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Notes"),
-        ),
-        body: BlocBuilder<NoteBloc, NoteState>(builder: (context, state) {
+      appBar: AppBar(
+        title: const Text("Notes"),
+      ),
+      body: BlocBuilder<NoteBloc, NoteState>(
+        builder: (context, state) {
           return ListView.builder(
             itemCount: state.notes.length,
             itemBuilder: (_, index) {
               return NoteListItem(note: state.notes[index]);
             },
           );
-        }));
+        },
+      ),
+    );
   }
 
   @override

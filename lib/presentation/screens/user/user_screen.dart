@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sample/di/interactor_storage.dart';
+import 'package:flutter_sample/navigation/main_router.dart';
 import 'package:flutter_sample/presentation/screens/user/bloc/user_bloc.dart';
 import 'package:flutter_sample/presentation/screens/user/user_list_item.dart';
 
@@ -30,7 +32,12 @@ class UserScreenState extends State<UserScreen> with AutomaticKeepAliveClientMix
               return ListView.builder(
                 itemCount: state.users.length,
                 itemBuilder: (_, index) {
-                  return UserListItem(user: state.users[index]);
+                  return UserListItem(
+                    user: state.users[index],
+                    onTap: () => AutoRouter.of(context).push(
+                      UserRouterRoute(user: state.users[index]),
+                    ),
+                  );
                 },
               );
             }
