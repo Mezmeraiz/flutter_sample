@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_sample/data/geo_repository.dart';
 import 'package:flutter_sample/data/user_router_repository.dart';
+import 'package:flutter_sample/di/repository_storage.dart';
+import 'package:flutter_sample/generated/l10n.dart';
 import 'package:flutter_sample/navigation/custom_user_router/user_router_bloc.dart';
 import 'package:flutter_sample/presentation/screens/map/bloc/map_bloc.dart';
 import 'package:flutter_sample/presentation/views/next_button.dart';
@@ -15,7 +16,7 @@ class MapScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => MapBloc(
-        geoRepository: context.read<GeoRepository>(),
+        geoRepository: context.read<RepositoryStorage>().geoRepository,
         userRouterRepository: context.read<UserRouterRepository>(),
       ),
       child: const MapScreenView(),
@@ -29,7 +30,7 @@ class MapScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Position")),
+      appBar: AppBar(title: Text(S.current.position)),
       body: BlocBuilder<MapBloc, MapState>(
         builder: (context, state) {
           final initialCameraPosition = CameraPosition(

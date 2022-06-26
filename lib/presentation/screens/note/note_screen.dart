@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_sample/generated/l10n.dart';
 import 'package:flutter_sample/presentation/screens/note/bloc/note_bloc.dart';
 import 'package:flutter_sample/presentation/screens/note/note_list_item.dart';
 
@@ -21,7 +22,7 @@ class NoteScreenState extends State<NoteScreen> with AutomaticKeepAliveClientMix
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Notes"),
+        title: Text(S.current.notes),
       ),
       body: BlocBuilder<NoteBloc, NoteState>(
         builder: (context, state) {

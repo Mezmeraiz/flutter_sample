@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sample/domain/entities/note.dart';
+import 'package:flutter_sample/generated/l10n.dart';
 import 'package:flutter_sample/presentation/screens/note_info/location_description_text.dart';
 import 'package:flutter_sample/presentation/screens/note_info/location_title_text.dart';
 import 'package:flutter_sample/presentation/screens/note_info/name_description_text.dart';
@@ -14,7 +15,7 @@ class NoteInfoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Note Info")),
+      appBar: AppBar(title: Text(S.current.noteInfo)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

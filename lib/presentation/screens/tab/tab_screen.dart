@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/generated/l10n.dart';
 import 'package:flutter_sample/presentation/screens/user/user_screen.dart';
 
 class TabScreen extends StatefulWidget {
@@ -17,16 +18,16 @@ class TabState extends State<TabScreen> with AutomaticKeepAliveClientMixin<TabSc
         body: NestedScrollView(
           floatHeaderSlivers: true,
           headerSliverBuilder: (context, _) => [
-            const SliverAppBar(
+            SliverAppBar(
               floating: true,
               pinned: true,
-              title: Text("TabScreen"),
+              title: Text(S.current.tabs),
               bottom: TabBar(
                 indicatorColor: Colors.white,
                 tabs: [
-                  Tab(text: "All"),
-                  Tab(text: "Male"),
-                  Tab(text: "Female"),
+                  Tab(text: S.current.all),
+                  Tab(text: S.current.male),
+                  Tab(text: S.current.female),
                 ],
               ),
             ),

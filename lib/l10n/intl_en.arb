@@ -1,4 +1,16 @@
 {
-    "helloWorld": "Hello World!",
-  "helloWorld2": "Привет2"
+  "users": "Users",
+  "notes": "Notes",
+  "position": "Position",
+  "location": "Location",
+  "name": "Name",
+  "noteInfo": "Note Info",
+  "photos": "Photos",
+  "saveUser": "Save User",
+  "save": "Save",
+  "tabs": "Tabs",
+  "all": "All",
+  "male": "Male",
+  "female": "Female",
+  "photoInfo": "Photo Info"
 }

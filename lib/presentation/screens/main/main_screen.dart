@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/generated/l10n.dart';
 import 'package:flutter_sample/navigation/main_router.dart';
 import 'package:flutter_sample/presentation/screens/note/note_screen.dart';
 import 'package:flutter_sample/presentation/screens/tab/tab_screen.dart';
@@ -25,9 +26,9 @@ class MainScreen extends StatelessWidget {
             currentIndex: tabsRouter.activeIndex,
             type: BottomNavigationBarType.fixed,
             onTap: (index) => tabsRouter.setActiveIndex(index),
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.group), label: "Users"),
-              BottomNavigationBarItem(icon: Icon(Icons.save), label: "Notes"),
+            items: [
+              BottomNavigationBarItem(icon: const Icon(Icons.group), label: S.current.users),
+              BottomNavigationBarItem(icon: const Icon(Icons.save), label: S.current.notes),
             ],
           ),
         );
@@ -35,3 +36,4 @@ class MainScreen extends StatelessWidget {
     );
   }
 }
+

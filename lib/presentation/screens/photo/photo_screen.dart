@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sample/data/user_router_repository.dart';
 import 'package:flutter_sample/di/interactor_storage.dart';
+import 'package:flutter_sample/generated/l10n.dart';
 import 'package:flutter_sample/navigation/custom_user_router/user_router_bloc.dart';
 import 'package:flutter_sample/presentation/screens/photo/bloc/PhotoBloc.dart';
 import 'package:flutter_sample/presentation/screens/photo/photo_list_item.dart';
@@ -41,7 +42,7 @@ class PhotoScreenState extends State<PhotoScreen> {
       value: _photoBloc,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Photos"),
+          title: Text(S.current.photos),
           leading: BackButton(onPressed: context.popRoute),
         ),
         body: BlocBuilder<PhotoBloc, PhotoState>(

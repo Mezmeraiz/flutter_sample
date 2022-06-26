@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sample/data/user_router_repository.dart';
 import 'package:flutter_sample/di/interactor_storage.dart';
 import 'package:flutter_sample/domain/entities/note.dart';
+import 'package:flutter_sample/generated/l10n.dart';
 import 'package:flutter_sample/navigation/custom_user_router/user_router_bloc.dart';
 import 'package:flutter_sample/navigation/main_router.dart';
 import 'package:flutter_sample/presentation/screens/note/bloc/note_bloc.dart';
@@ -34,7 +35,7 @@ class SaveNoteScreenView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Save User")),
+      appBar: AppBar(title: Text(S.current.saveUser)),
       body: BlocListener<SaveNoteBloc, SaveNoteState>(
         listenWhen: (p, c) => c is DoneSaveNoteState,
         listener: (context, state) => _onDone(context, state.note),
