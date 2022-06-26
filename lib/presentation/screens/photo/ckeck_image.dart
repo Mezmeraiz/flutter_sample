@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/common/assets_icons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CheckImage extends StatelessWidget {
@@ -16,7 +17,7 @@ class CheckImage extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: isSelected
           ? SvgPicture.asset(
-              "assets/icons/check_circle.svg",
+              AssetIcons.checkCircle,
               color: Colors.blue,
             )
           : const SizedBox.shrink(),
