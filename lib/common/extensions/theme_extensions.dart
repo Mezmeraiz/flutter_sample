@@ -28,16 +28,15 @@ class CustomColors extends ThemeExtension<CustomColors> {
     Color? secondaryBackground,
     Color? primaryText,
     Color? secondaryText,
-  }) {
-    return CustomColors(
-      primary: primary ?? this.primary,
-      secondary: secondary ?? this.secondary,
-      primaryBackground: primaryBackground ?? this.primaryBackground,
-      secondaryBackground: secondaryBackground ?? this.secondaryBackground,
-      primaryText: primaryText ?? this.primaryText,
-      secondaryText: secondaryText ?? this.secondaryText,
-    );
-  }
+  }) =>
+      CustomColors(
+        primary: primary ?? this.primary,
+        secondary: secondary ?? this.secondary,
+        primaryBackground: primaryBackground ?? this.primaryBackground,
+        secondaryBackground: secondaryBackground ?? this.secondaryBackground,
+        primaryText: primaryText ?? this.primaryText,
+        secondaryText: secondaryText ?? this.secondaryText,
+      );
 
   @override
   ThemeExtension<CustomColors> lerp(ThemeExtension<CustomColors>? other, double t) {

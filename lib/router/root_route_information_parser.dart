@@ -45,6 +45,7 @@ class RootRouteInformationParser extends RouteInformationParser<RouteConfigurati
 
   String normalizeUrl(String location) {
     location = '/${location.split('/').where((element) => element.isNotEmpty).toSet().toList().join('/')}';
+
     if (storage.token == null) {
       location = '/$authPath';
     } else if (location.startsWith('/$authPath') || location == '/') {
@@ -52,6 +53,7 @@ class RootRouteInformationParser extends RouteInformationParser<RouteConfigurati
     } else {
       List<String> paths = location.split('/').where((element) => element.isNotEmpty).toList();
       List<String> pathsWithoutParams = [];
+
       for (final String path in paths) {
         if (path.contains('?')) {
           final uri = Uri.parse(path);
@@ -65,6 +67,7 @@ class RootRouteInformationParser extends RouteInformationParser<RouteConfigurati
           pathsWithoutParams.add(path);
         }
       }
+
       if (location != '/$catPath' &&
           !legalPaths.any((element) => const ListEquality().equals(pathsWithoutParams, element))) {
         location = '/$catPath';

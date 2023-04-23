@@ -8,15 +8,6 @@ class CatRouterDelegate extends NestedRouterDelegate {
   @override
   String get prefix => '/$catPath';
 
-  // @override
-  // RouteConfiguration? get currentConfiguration => currentRouteConfiguration;
-
-  // @override
-  // Widget build(BuildContext context) => RouterScope(
-  //       routerDelegate: this,
-  //       child: getPageBuilder(),
-  //     );
-
   @override
   Widget getScreen(String location, Map<String, Object?>? state) {
     late Widget screen;

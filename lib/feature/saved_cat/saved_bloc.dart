@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_sample/data/cat_repository.dart';
 import 'package:flutter_sample/data/model/cat.dart';
-import 'package:flutter_sample/data/refresh_saved_repository_impl.dart';
+import 'package:flutter_sample/data/refresh_saved_repository.dart';
 import 'package:flutter_sample/feature/saved_cat/saved_event.dart';
 import 'package:flutter_sample/feature/saved_cat/saved_state.dart';
 

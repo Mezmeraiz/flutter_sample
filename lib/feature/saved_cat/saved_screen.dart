@@ -14,12 +14,10 @@ class SavedScreen extends StatelessWidget {
   const SavedScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => DependencyScope.getBlocFactory(context).savedBloc..add(const SavedEvent.load()),
-      child: const SavedView(),
-    );
-  }
+  Widget build(BuildContext context) => BlocProvider(
+        create: (context) => DependencyScope.getBlocFactory(context).savedBloc..add(const SavedEvent.load()),
+        child: const SavedView(),
+      );
 }
 
 class SavedView extends StatefulWidget {

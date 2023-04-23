@@ -9,9 +9,7 @@ const catTableName = 'cat';
 class DatabaseHelper {
   static const databaseName = 'sample_database.db';
 
-  Future<Database> open() async {
-    return await openDatabase(await getDatabasePath(), version: 1, onCreate: _createDB);
-  }
+  Future<Database> open() async => openDatabase(await getDatabasePath(), version: 1, onCreate: _createDB);
 
   Future _createDB(Database db, int version) async {
     var createQuery = await rootBundle.loadString(AssetDatabase.create);

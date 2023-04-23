@@ -1,6 +1,6 @@
 import 'package:flutter_sample/data/auth_repository.dart';
 import 'package:flutter_sample/data/cat_repository.dart';
-import 'package:flutter_sample/data/refresh_saved_repository_impl.dart';
+import 'package:flutter_sample/data/refresh_saved_repository.dart';
 import 'package:flutter_sample/di/factory/backend_factory.dart';
 import 'package:flutter_sample/di/factory/database_factory.dart';
 import 'package:flutter_sample/di/factory/dependency_factory.dart';

@@ -20,16 +20,17 @@ abstract class BaseRouterDelegate extends RouterDelegate<RouteConfiguration> wit
         configuration: currentConfiguration!,
         pageBuilder: buildPages,
         builder: (context, pages) => Navigator(
-            key: _navigatorKey,
-            pages: pages,
-            onPopPage: (route, result) {
-              if (!route.didPop(result) || !canPop()) {
-                return false;
-              } else {
-                _trimConfiguration();
-                return true;
-              }
-            }),
+          key: _navigatorKey,
+          pages: pages,
+          onPopPage: (route, result) {
+            if (!route.didPop(result) || !canPop()) {
+              return false;
+            } else {
+              _trimConfiguration();
+              return true;
+            }
+          },
+        ),
       );
 
   @override
@@ -53,6 +54,7 @@ abstract class BaseRouterDelegate extends RouterDelegate<RouteConfiguration> wit
   @optionalTypeArgs
   Future<T?> push<T extends Object?>(RouteConfiguration configuration) {
     Map<String, Object?>? newState;
+
     if (currentRouteConfiguration!.state != null || configuration.state != null) {
       newState = <String, Object?>{};
       if (currentRouteConfiguration!.state != null) {
@@ -62,12 +64,14 @@ abstract class BaseRouterDelegate extends RouterDelegate<RouteConfiguration> wit
         newState.addAll(configuration.state!);
       }
     }
+
     final popCompleter = Completer<T?>();
     currentRouteConfiguration = RouteConfiguration(
       location: '${currentRouteConfiguration!.location}${configuration.location}',
       state: newState,
       popCompleter: popCompleter,
     );
+
     notifyListeners();
     return popCompleter.future;
   }

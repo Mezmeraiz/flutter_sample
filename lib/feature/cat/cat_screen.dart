@@ -17,12 +17,10 @@ class CatScreen extends StatelessWidget {
   const CatScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => DependencyScope.getBlocFactory(context).catBloc..add(const Fetch()),
-      child: const CatView(),
-    );
-  }
+  Widget build(BuildContext context) => BlocProvider(
+        create: (context) => DependencyScope.getBlocFactory(context).catBloc..add(const Fetch()),
+        child: const CatView(),
+      );
 }
 
 class CatView extends StatefulWidget {

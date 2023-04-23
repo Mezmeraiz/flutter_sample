@@ -8,19 +8,6 @@ class SavedRouterDelegate extends NestedRouterDelegate {
   @override
   String get prefix => '/$savedPath';
 
-  // @override
-  // RouteConfiguration? get currentConfiguration => currentRouteConfiguration;
-  //
-  // SavedRouterDelegate() {
-  //   currentRouteConfiguration = RouteConfiguration(location: prefix);
-  // }
-
-  // @override
-  // Widget build(BuildContext context) => RouterScope(
-  //       routerDelegate: this,
-  //       child: getPageBuilder(),
-  //     );
-
   @override
   Widget getScreen(String location, Map<String, Object?>? state) {
     late Widget screen;

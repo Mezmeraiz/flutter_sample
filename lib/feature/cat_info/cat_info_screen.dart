@@ -25,15 +25,13 @@ class CatInfoScreen extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => DependencyScope.getBlocFactory(context).getCatInfoBloc(
-        id: id,
-        saved: saved,
-      )..add(const CatInfoEvent.load()),
-      child: CatInfoView(saved: saved),
-    );
-  }
+  Widget build(BuildContext context) => BlocProvider(
+        create: (context) => DependencyScope.getBlocFactory(context).getCatInfoBloc(
+          id: id,
+          saved: saved,
+        )..add(const CatInfoEvent.load()),
+        child: CatInfoView(saved: saved),
+      );
 }
 
 class CatInfoView extends StatelessWidget {

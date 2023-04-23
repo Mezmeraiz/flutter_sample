@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_sample/data/cat_repository.dart';
 import 'package:flutter_sample/data/database/dao/cat_dao_impl.dart';
-import 'package:flutter_sample/data/refresh_saved_repository_impl.dart';
+import 'package:flutter_sample/data/refresh_saved_repository.dart';
 import 'package:flutter_sample/feature/cat_info/cat_info_event.dart';
 import 'package:flutter_sample/feature/cat_info/cat_info_state.dart';
 

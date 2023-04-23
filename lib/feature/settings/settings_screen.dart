@@ -17,12 +17,10 @@ class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => DependencyScope.getBlocFactory(context).settingsBloc,
-      child: const SettingsView(),
-    );
-  }
+  Widget build(BuildContext context) => BlocProvider(
+        create: (context) => DependencyScope.getBlocFactory(context).settingsBloc,
+        child: const SettingsView(),
+      );
 }
 
 class SettingsView extends StatefulWidget {

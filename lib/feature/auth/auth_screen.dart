@@ -14,12 +14,10 @@ class AuthScreen extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => DependencyScope.getBlocFactory(context).authBloc,
-      child: const AuthView(),
-    );
-  }
+  Widget build(BuildContext context) => BlocProvider(
+        create: (context) => DependencyScope.getBlocFactory(context).authBloc,
+        child: const AuthView(),
+      );
 }
 
 class AuthView extends StatelessWidget {

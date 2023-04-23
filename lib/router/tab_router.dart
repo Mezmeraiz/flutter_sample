@@ -32,6 +32,7 @@ class TabRouterState extends State<TabRouter> {
     super.initState();
     delegates = widget.delegateMap.values.toList();
     final rootRouterDelegate = RootRouterScope.of(context).delegate;
+
     for (final nestedRouterDelegate in delegates) {
       rootRouterDelegate.subscribeToNestedRouter(nestedRouterDelegate);
 

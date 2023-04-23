@@ -57,9 +57,9 @@ class DarkTheme {
 
   late final _bottomSheetTheme = const BottomSheetThemeData(backgroundColor: _secondaryBackground);
 
-  static const _appBarTheme = AppBarTheme(color: _primary);
+  late final _appBarTheme = const AppBarTheme(color: _primary);
 
-  static const _progressIndicatorTheme = ProgressIndicatorThemeData(color: _secondary);
+  late final _progressIndicatorTheme = const ProgressIndicatorThemeData(color: _secondary);
 
   late final _dividerThemeData = const DividerThemeData(
     space: 0,
