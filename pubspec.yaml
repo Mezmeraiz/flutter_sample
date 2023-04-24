@@ -83,11 +83,11 @@ flutter:
   fonts:
     - family: OpenSans
       fonts:
-        - asset: assets/fonts/openSans_regular.ttf
+        - asset: assets/fonts/open_sans_regular.ttf
           weight: 400
-        - asset: assets/fonts/openSans_semibold.ttf
+        - asset: assets/fonts/open_sans_semi_bold.ttf
           weight: 600
-        - asset: assets/fonts/openSans_bold.ttf
+        - asset: assets/fonts/open_sans_bold.ttf
           weight: 700
   # To add assets to your application, add an assets section, like this:
   # assets:
