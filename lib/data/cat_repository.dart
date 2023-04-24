@@ -20,6 +20,7 @@ abstract class CatRepository {
 
 class CatRepositoryImpl implements CatRepository {
   CatApi catApi;
+
   CatDao catDao;
 
   CatRepositoryImpl({

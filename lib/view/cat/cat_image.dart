@@ -16,9 +16,7 @@ class CatImage extends StatelessWidget {
         child: SizedBox(
           width: 48,
           height: 48,
-          child: BaseNetworkImage(
-            imageUrl: cat.picture,
-          ),
+          child: BaseNetworkImage(imageUrl: cat.picture),
         ),
       );
 }

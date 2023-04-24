@@ -15,7 +15,9 @@ abstract class RepositoryFactory {
 
 class RepositoryFactoryImpl implements RepositoryFactory {
   final DependencyFactory _dependencyFactory;
+
   final DatabaseFactory _databaseFactory;
+
   final BackendFactory _backendFactory;
 
   RepositoryFactoryImpl(
