@@ -7,6 +7,7 @@ part 'cat_info_state.freezed.dart';
 class CatInfoState with _$CatInfoState {
   const factory CatInfoState({
     @Default('') String id,
+    @Default(false) bool saved,
     @Default(Cat()) Cat cat,
     @Default(CatInfoStatus.loading) CatInfoStatus status,
     @Default(CatInfoAction.none) CatInfoAction action,

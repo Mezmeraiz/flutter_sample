@@ -9,15 +9,16 @@ import 'package:flutter_sample/feature/cat_info/cat_info_state.dart';
 class CatInfoBloc extends Bloc<CatInfoEvent, CatInfoState> {
   final CatRepository catRepository;
   final RefreshSavedRepository refreshSavedRepository;
-  final String id;
-  final bool saved;
 
   CatInfoBloc({
     required this.catRepository,
     required this.refreshSavedRepository,
-    required this.id,
-    required this.saved,
-  }) : super(CatInfoState(id: id)) {
+    required String id,
+    required bool saved,
+  }) : super(CatInfoState(
+          id: id,
+          saved: saved,
+        )) {
     on<Load>(_load);
     on<Save>(_save, transformer: droppable());
   }
@@ -30,7 +31,7 @@ class CatInfoBloc extends Bloc<CatInfoEvent, CatInfoState> {
       status: CatInfoStatus.loading,
     ));
     try {
-      final cat = await (saved ? catRepository.getSavedCat(id: id) : catRepository.fetchCat(id: state.id));
+      final cat = await (state.saved ? catRepository.getSavedCat(id: state.id) : catRepository.fetchCat(id: state.id));
       emit(state.copyWith(
         status: CatInfoStatus.data,
         cat: cat,

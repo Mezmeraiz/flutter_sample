@@ -20,11 +20,11 @@ class RepositoryFactoryImpl implements RepositoryFactory {
 
   final BackendFactory _backendFactory;
 
-  RepositoryFactoryImpl(
-      {required DependencyFactory dependencyFactory,
-      required DatabaseFactory databaseFactory,
-      required BackendFactory backendFactory})
-      : _dependencyFactory = dependencyFactory,
+  RepositoryFactoryImpl({
+    required DependencyFactory dependencyFactory,
+    required DatabaseFactory databaseFactory,
+    required BackendFactory backendFactory,
+  })  : _dependencyFactory = dependencyFactory,
         _databaseFactory = databaseFactory,
         _backendFactory = backendFactory;
 
