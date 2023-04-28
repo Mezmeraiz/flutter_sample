@@ -78,7 +78,7 @@ abstract class BaseRouterDelegate extends RouterDelegate<RouteConfiguration> wit
 
   Future<void> navigate(RouteConfiguration configuration) => setNewRoutePath(configuration);
 
-  void refresh() => notifyListeners();
+  void update() => notifyListeners();
 
   List<Page<dynamic>> buildPages() {
     List<String> paths = currentRouteConfiguration!.location.split('/').where((e) => e.isNotEmpty).toList();

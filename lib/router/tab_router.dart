@@ -1,4 +1,6 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sample/di/dependency_scope.dart';
 import 'package:flutter_sample/router/base_router_delegate.dart';
 import 'package:flutter_sample/router/nested_router_delegate.dart';
 import 'package:flutter_sample/router/scope/root_router_scope.dart';
@@ -23,6 +25,7 @@ class TabRouter extends StatefulWidget {
 }
 
 class TabRouterState extends State<TabRouter> {
+  late List<ChildBackButtonDispatcher> childBackButtonDispatchers;
   late List<RouterScope> routers;
   late final List<BaseRouterDelegate> delegates;
   int currentTab = 0;
@@ -31,6 +34,9 @@ class TabRouterState extends State<TabRouter> {
   void initState() {
     super.initState();
     delegates = widget.delegateMap.values.toList();
+    final rootBackButtonDispatcher = DependencyScope.getDependenciesFactory(context).rootBackButtonDispatcher;
+    childBackButtonDispatchers =
+        List.generate(delegates.length, (_) => ChildBackButtonDispatcher(rootBackButtonDispatcher));
     final rootRouterDelegate = RootRouterScope.of(context).delegate;
 
     for (final nestedRouterDelegate in delegates) {
@@ -54,25 +60,33 @@ class TabRouterState extends State<TabRouter> {
     });
 
     routers = delegates
-        .map(
-          (routerDelegate) => RouterScope(
+        .mapIndexed(
+          (index, routerDelegate) => RouterScope(
             routerDelegate: routerDelegate,
-            child: Router(routerDelegate: routerDelegate),
+            child: Router(
+              routerDelegate: routerDelegate,
+              backButtonDispatcher: childBackButtonDispatchers[index],
+            ),
           ),
         )
         .toList();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      delegates[currentTab].refresh();
+      _update();
     });
   }
 
   void changeTab(int index, {bool updateDelegate = true}) {
     currentTab = index;
     if (updateDelegate) {
-      (delegates[currentTab]).refresh();
+      _update();
     }
     setState(() {});
+  }
+
+  void _update() {
+    delegates[currentTab].update();
+    childBackButtonDispatchers[currentTab].takePriority();
   }
 
   BaseRouterDelegate delegateByPath(String path) => widget.delegateMap[path]!;
